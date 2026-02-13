@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SPMB - SMK Muhammadiyah Bintan</title>
+  <style>
+    :root {
+      --hijau-tua: #1B5E20;
+      --hijau: #2E7D32;
+      --hijau-cerah: #4CAF50;
+      --hijau-muda: #A5D6A7;
+      --hijau-pale: #E8F5E9;
+      --emas: #F9A825;
+      --emas-muda: #FFF9C4;
+      --putih: #ffffff;
+      --abu-gelap: #263238;
+      --abu: #546E7A;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: Arial, sans-serif; background: #f0f7f0; color: var(--abu-gelap); }
+
+    /* NAVBAR */
+    header {
+      background: var(--hijau-tua);
+      padding: 15px 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    header img { height: 40px; }
+    header span { color: white; font-weight: 700; font-size: 16px; }
+    header a { color: white; text-decoration: none; margin-left: auto; font-size: 14px; }
+
+    /* HERO */
+    .hero {
+      background: linear-gradient(135deg, #1B5E20 0%, #2E7D32 50%, #388E3C 100%);
+      padding: 60px 20px 80px;
+      text-align: center;
+      position: relative;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 50px;
+      background: #f0f7f0;
+      clip-path: ellipse(55% 100% at 50% 100%);
+    }
+    .badge {
+      display: inline-block;
+      background: var(--emas);
+      color: var(--abu-gelap);
+      font-weight: 700;
+      font-size: 12px;
+      letter-spacing: 2px;
+      padding: 6px 18px;
+      border-radius: 50px;
+      margin-bottom: 18px;
+    }
+    .hero h1 { font-size: 26px; color: white; line-height: 1.3; margin-bottom: 8px; }
+    .hero h1 span { color: var(--emas); }
+    .hero p { color: rgba(255,255,255,0.85); font-size: 14px; margin-bottom: 5px; }
+    .hero .alamat { color: rgba(255,255,255,0.65); font-size: 12px; margin-bottom: 25px; }
+
+    /* PROMO BANNER */
+    .promo {
+      background: linear-gradient(135deg, var(--emas), #FF8F00);
+      margin: 30px 20px;
+      border-radius: 16px;
+      padding: 20px 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      box-shadow: 0 8px 25px rgba(249,168,37,0.35);
+    }
+    .promo .pct { font-size: 42px; font-weight: 900; color: white; line-height: 1; flex-shrink: 0; }
+    .promo-text h3 { color: white; font-size: 16px; margin-bottom: 4px; }
+    .promo-text p { color: rgba(255,255,255,0.85); font-size: 13px; }
+
+    /* SECTION */
+    .sec { padding: 40px 20px; max-width: 860px; margin: 0 auto; }
+    .sec-title { text-align: center; margin-bottom: 28px; }
+    .sec-title .tag {
+      display: inline-block;
+      background: var(--hijau-pale);
+      color: var(--hijau-tua);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      padding: 5px 14px;
+      border-radius: 50px;
+      margin-bottom: 10px;
+    }
+    .sec-title h2 { font-size: 22px; color: var(--hijau-tua); }
+
+    /* JADWAL */
+    .jadwal-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .jcard {
+      background: white;
+      border-radius: 14px;
+      padding: 22px;
+      border-left: 5px solid var(--hijau-cerah);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+    }
+    .jcard.gelombang2 { border-left-color: var(--emas); }
+    .jcard .fase { font-size: 10px; font-weight: 700; letter-spacing: 2px; color: var(--hijau-cerah); margin-bottom: 8px; }
+    .jcard.gelombang2 .fase { color: #F57F17; }
+    .jcard h3 { font-size: 15px; color: var(--abu-gelap); margin-bottom: 6px; }
+    .jcard .tgl { font-size: 13px; color: var(--abu); }
+    .jcard .tgl span { font-weight: 700; color: var(--hijau-tua); font-size: 15px; }
+
+    /* SYARAT */
+    .syarat-box {
+      background: white;
+      border-radius: 16px;
+      padding: 28px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+    }
+    .syarat-list { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .syarat-list li { display: flex; align-items: flex-start; gap: 10px; font-size: 13px; line-height: 1.4; }
+    .syarat-list li .ic {
+      width: 28px; height: 28px;
+      background: var(--hijau-pale);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; flex-shrink: 0; margin-top: 1px;
+    }
+
+    /* JURUSAN */
+    .jurusan-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .jurusan-card {
+      background: white;
+      border-radius: 14px;
+      padding: 22px 18px;
+      text-align: center;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+      border-top: 4px solid var(--hijau-cerah);
+    }
+    .jurusan-card .icon { font-size: 32px; margin-bottom: 10px; }
+    .jurusan-card h3 { font-size: 13px; color: var(--hijau-tua); font-weight: 700; }
+
+    /* EKSKUL & FASILITAS */
+    .dua-kolom { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .info-box {
+      background: white;
+      border-radius: 14px;
+      padding: 22px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+    }
+    .info-box h3 { color: var(--hijau-tua); font-size: 15px; margin-bottom: 14px; border-bottom: 2px solid var(--hijau-pale); padding-bottom: 8px; }
+    .info-box ul { list-style: none; }
+    .info-box ul li { font-size: 13px; color: var(--abu-gelap); padding: 5px 0; border-bottom: 1px solid #f5f5f5; display: flex; align-items: center; gap: 8px; }
+    .info-box ul li::before { content: '✓'; color: var(--hijau-cerah); font-weight: 700; flex-shrink: 0; }
+
+    /* FORM */
+    .form-box {
+      background: white;
+      border-radius: 16px;
+      padding: 30px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+    }
+    .fgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+    .fg { display: flex; flex-direction: column; gap: 5px; }
+    .fg.full { grid-column: 1 / -1; }
+    .fg label { font-size: 12px; font-weight: 700; color: var(--abu-gelap); }
+    .fg input, .fg select, .fg textarea {
+      padding: 11px 14px;
+      border: 2px solid #E8F5E9;
+      border-radius: 10px;
+      font-family: Arial, sans-serif;
+      font-size: 13px;
+      color: var(--abu-gelap);
+      background: #fafafa;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .fg input:focus, .fg select:focus, .fg textarea:focus {
+      border-color: var(--hijau-cerah);
+      background: white;
+    }
+    .fg textarea { height: 80px; resize: none; }
+    .btn-submit {
+      width: 100%;
+      background: linear-gradient(135deg, var(--hijau-tua), var(--hijau-cerah));
+      color: white;
+      border: none;
+      padding: 15px;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+    .btn-submit:hover { opacity: 0.9; transform: translateY(-2px); }
+    .btn-submit:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+    /* NOTIF */
+    .notif {
+      display: none;
+      padding: 14px 18px;
+      border-radius: 10px;
+      margin-top: 16px;
+      font-size: 14px;
+      font-weight: 600;
+      text-align: center;
+    }
+    .notif.success { background: #E8F5E9; color: #1B5E20; border: 2px solid #A5D6A7; }
+    .notif.error { background: #FFEBEE; color: #B71C1C; border: 2px solid #FFCDD2; }
+
+    /* KONTAK */
+    .kontak {
+      background: linear-gradient(135deg, var(--hijau-tua), var(--hijau));
+      padding: 50px 20px;
+      text-align: center;
+    }
+    .kontak h2 { color: white; font-size: 20px; margin-bottom: 8px; }
+    .kontak p { color: rgba(255,255,255,0.75); font-size: 13px; margin-bottom: 22px; }
+    .kontak-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .wa-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #25D366;
+      color: white;
+      padding: 13px 24px;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 14px;
+      text-decoration: none;
+      box-shadow: 0 6px 20px rgba(37,211,102,0.3);
+    }
+
+    .divider { height: 2px; background: linear-gradient(to right, transparent, var(--hijau-muda), transparent); margin: 0 30px; }
+
+    @media (max-width: 500px) {
+      .jadwal-grid, .jurusan-grid, .dua-kolom, .fgrid, .syarat-list { grid-template-columns: 1fr; }
+      .fg.full { grid-column: 1; }
+      .promo { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <img src="logo.png" alt="Logo">
+  <span>SMK Muhammadiyah Bintan</span>
+  <a href="index.html">← Beranda</a>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="badge">🎓 SPMB TP. 2026/2027</div>
+  <h1>Sistem Penerimaan Murid Baru<br><span>SMKS Muhammadiyah Bintan</span></h1>
+  <p>Unggul dalam Prestasi, Berakhlak Mulia</p>
+  <p class="alamat">📍 Jl. Mekar Sari No.3, Kel. Tanjung Uban Timur, Kec. Bintan Utara</p>
+</div>
+
+<!-- PROMO -->
+<div class="promo" style="max-width:860px; margin: 30px auto 0; border-radius:16px;">
+  <div class="pct">50%</div>
+  <div class="promo-text">
+    <h3>Potongan Biaya Pembangunan Sekolah!</h3>
+    <p>Khusus Gelombang Pertama — Hanya untuk 5 pendaftar tercepat! 🔥</p>
+  </div>
+</div>
+
+<!-- JADWAL -->
+<div class="sec">
+  <div class="sec-title">
+    <div class="tag">📅 JADWAL</div>
+    <h2>Jadwal Pendaftaran</h2>
+  </div>
+  <div class="jadwal-grid">
+    <div class="jcard">
+      <div class="fase">🟢 GELOMBANG PERTAMA</div>
+      <h3>Dibuka Gelombang Pertama</h3>
+      <div class="tgl"><span>12 Januari 2026</span> — <span>13 Maret 2026</span></div>
+    </div>
+    <div class="jcard gelombang2">
+      <div class="fase">🟡 GELOMBANG KEDUA</div>
+      <h3>Dibuka Gelombang Kedua</h3>
+      <div class="tgl"><span>30 Maret 2026</span> — <span>07 Juli 2026</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- JURUSAN -->
+<div class="sec">
+  <div class="sec-title">
+    <div class="tag">🎯 PROGRAM KEAHLIAN</div>
+    <h2>Pilihan Jurusan</h2>
+  </div>
+  <div class="jurusan-grid">
+    <div class="jurusan-card">
+      <div class="icon">📊</div>
+      <h3>Akuntansi dan Keuangan</h3>
+    </div>
+    <div class="jurusan-card">
+      <div class="icon">🗂️</div>
+      <h3>Manajemen Perkantoran</h3>
+    </div>
+    <div class="jurusan-card">
+      <div class="icon">✈️</div>
+      <h3>Usaha Layanan Wisata</h3>
+    </div>
+    <div class="jurusan-card">
+      <div class="icon">💻</div>
+      <h3>Rekayasa Perangkat Lunak</h3>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- EKSKUL & FASILITAS -->
+<div class="sec">
+  <div class="dua-kolom">
+    <div class="info-box">
+      <h3>🏃 Ekstrakurikuler</h3>
+      <ul>
+        <li>Tahsin & Tahfizh Qur'an</li>
+        <li>Drumband - Tapak Suci</li>
+        <li>Hizbul Wathan / Pramuka</li>
+        <li>Tata Boga</li>
+        <li>Seni Tari - Futsal</li>
+      </ul>
+    </div>
+    <div class="info-box">
+      <h3>🏫 Fasilitas</h3>
+      <ul>
+        <li>Lab. Komputer - CCTV - WiFi</li>
+        <li>Lab. ULW</li>
+        <li>Mushollah</li>
+        <li>Perpustakaan - UKS</li>
+        <li>Lapangan Olahraga</li>
+        <li>Kantin - Parkir Luas</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- SYARAT -->
+<div class="sec">
+  <div class="sec-title">
+    <div class="tag">📋 PERSYARATAN</div>
+    <h2>Syarat Pendaftaran</h2>
+  </div>
+  <div class="syarat-box">
+    <ul class="syarat-list">
+      <li><div class="ic">📸</div> Fotokopi Akte Kelahiran</li>
+      <li><div class="ic">👨‍👩‍👧</div> Fotokopi Kartu Keluarga</li>
+      <li><div class="ic">📄</div> Fotokopi Ijazah/Surat Keterangan Lulus</li>
+      <li><div class="ic">🖼️</div> Pas Foto Berwarna 3×4 (2 lembar)</li>
+      <li><div class="ic">📊</div> Fotokopi Rapor Kelas 7, 8 & 9</li>
+      <li><div class="ic">🏥</div> Surat Keterangan Kesehatan dari Puskesmas</li>
+      <li><div class="ic">🪪</div> Fotokopi KIP (jika ada)</li>
+    </ul>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- FORM -->
+<div class="sec">
+  <div class="sec-title">
+    <div class="tag">✍️ FORMULIR</div>
+    <h2>Form Pendaftaran Online</h2>
+  </div>
+  <div class="form-box">
+    <div class="fgrid">
+      <div class="fg">
+        <label>Nama Lengkap *</label>
+        <input type="text" id="nama" placeholder="Nama lengkap calon siswa">
+      </div>
+      <div class="fg">
+        <label>Tempat, Tanggal Lahir *</label>
+        <input type="text" id="ttl" placeholder="Kota, DD/MM/YYYY">
+      </div>
+      <div class="fg">
+        <label>Asal Sekolah *</label>
+        <input type="text" id="asal_sekolah" placeholder="SMP/MTs asal">
+      </div>
+      <div class="fg">
+        <label>Nomor WhatsApp *</label>
+        <input type="text" id="no_wa" placeholder="08xxxxxxxxxx">
+      </div>
+      <div class="fg">
+        <label>Pilihan Jurusan *</label>
+        <select id="jurusan">
+          <option value="">-- Pilih Jurusan --</option>
+          <option>Akuntansi dan Keuangan</option>
+          <option>Manajemen Perkantoran</option>
+          <option>Usaha Layanan Wisata</option>
+          <option>Rekayasa Perangkat Lunak</option>
+        </select>
+      </div>
+      <div class="fg">
+        <label>Nama Orang Tua *</label>
+        <input type="text" id="nama_ortu" placeholder="Nama ayah/ibu">
+      </div>
+      <div class="fg full">
+        <label>Alamat Lengkap *</label>
+        <textarea id="alamat" placeholder="Alamat lengkap tempat tinggal"></textarea>
+      </div>
+    </div>
+    <button class="btn-submit" id="btnSubmit" onclick="kirimForm()">🚀 Kirim Pendaftaran</button>
+    <div class="notif" id="notif"></div>
+  </div>
+</div>
+
+<!-- KONTAK -->
+<div class="kontak">
+  <h2>Informasi Lebih Lanjut</h2>
+  <p>Hubungi kami langsung via WhatsApp</p>
+  <div class="kontak-btns">
+    <a href="https://wa.me/6285173334099" class="wa-btn">💬 Amar — 0851-7333-4099</a>
+    <a href="https://wa.me/6283188851492" class="wa-btn">💬 Andres — 0831-8885-1492</a>
+  </div>
+</div>
+
+<script>
+  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzLy7VsS4MCx_BwjrfD-LjpeNIN5Cuw3CuuX6D6xkyL9h1hMi2p-gA-YxtC5Qspg-chNg/exec';
+
+  function kirimForm() {
+    var nama = document.getElementById('nama').value.trim();
+    var ttl = document.getElementById('ttl').value.trim();
+    var asal = document.getElementById('asal_sekolah').value.trim();
+    var wa = document.getElementById('no_wa').value.trim();
+    var jurusan = document.getElementById('jurusan').value;
+    var ortu = document.getElementById('nama_ortu').value.trim();
+    var alamat = document.getElementById('alamat').value.trim();
+
+    if (!nama || !ttl || !asal || !wa || !jurusan || !ortu || !alamat) {
+      tampilNotif('error', '⚠️ Semua field wajib diisi!');
+      return;
+    }
+
+    var btn = document.getElementById('btnSubmit');
+    btn.disabled = true;
+    btn.textContent = '⏳ Mengirim...';
+
+    var data = {
+      nama: nama,
+      ttl: ttl,
+      asal_sekolah: asal,
+      no_wa: wa,
+      jurusan: jurusan,
+      nama_ortu: ortu,
+      alamat: alamat
+    };
+
+    fetch(SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    })
+    .then(function() {
+      tampilNotif('success', '✅ Pendaftaran berhasil dikirim! Kami akan segera menghubungi kamu.');
+      btn.textContent = '✅ Terkirim!';
+      document.getElementById('nama').value = '';
+      document.getElementById('ttl').value = '';
+      document.getElementById('asal_sekolah').value = '';
+      document.getElementById('no_wa').value = '';
+      document.getElementById('jurusan').value = '';
+      document.getElementById('nama_ortu').value = '';
+      document.getElementById('alamat').value = '';
+    })
+    .catch(function() {
+      tampilNotif('error', '❌ Gagal mengirim. Coba lagi atau hubungi WhatsApp kami.');
+      btn.disabled = false;
+      btn.textContent = '🚀 Kirim Pendaftaran';
+    });
+  }
+
+  function tampilNotif(tipe, pesan) {
+    var notif = document.getElementById('notif');
+    notif.className = 'notif ' + tipe;
+    notif.textContent = pesan;
+    notif.style.display = 'block';
+    notif.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+</script>
+
+</body>
+  </html>
