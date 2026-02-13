@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SMK Muhammadiyah Bintan</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --hijau-tua: #2E7D32;
+      --hijau: #4CAF50;
+      --hijau-muda: #A5D6A7;
+      --abu: #424242;
+      --putih: #ffffff;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Poppins', sans-serif; color: var(--abu); background: var(--putih); line-height: 1.6; }
+    img { max-width: 100%; display: block; }
+    h1, h2, h3 { font-family: 'Roboto', sans-serif; }
+    .container { max-width: 1200px; margin: auto; padding: 0 20px; }
+    header { background: var(--hijau-tua); position: sticky; top: 0; z-index: 1000; }
+    .header-inner { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; }
+    .logo { display: flex; align-items: center; color: white; font-weight: 700; font-size: 1.3rem; }
+    .logo img { height: 45px; margin-right: 10px; }
+    nav ul { list-style: none; display: flex; gap: 28px; }
+    nav a { color: white; font-weight: 500; text-decoration: none; }
+    .menu-toggle { display: none; font-size: 1.8rem; color: white; cursor: pointer; }
+    .hero {
+      background: linear-gradient(rgba(46,125,50,.65), rgba(46,125,50,.45)), url('hero.png') center/cover no-repeat;
+      color: white; text-align: center; padding: 130px 0 110px;
+    }
+    .hero h1 { font-size: 3.3rem; margin-bottom: 15px; }
+    .hero p { font-size: 1.3rem; margin-bottom: 30px; }
+    .btn { display: inline-block; background: var(--hijau); color: white; padding: 14px 34px; border-radius: 50px; font-weight: 600; margin: 8px; text-decoration: none; }
+    .btn.alt { background: var(--hijau-muda); color: var(--hijau-tua); }
+    section { padding: 80px 0; }
+    h2 { text-align: center; font-size: 2.4rem; color: var(--hijau-tua); margin-bottom: 50px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+    .card { background: white; padding: 35px 30px; border-radius: 16px; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,.08); }
+    .card img { height: 80px; margin: 0 auto 20px; }
+    footer { background: var(--hijau-tua); color: white; text-align: center; padding: 50px 20px 30px; }
+    @media (max-width: 768px) {
+      .menu-toggle { display: block; }
+      nav ul { position: fixed; top: 70px; left: 0; right: 0; background: var(--hijau-tua); flex-direction: column; align-items: center; padding: 25px; gap: 18px; transform: translateY(-120%); transition: .3s ease; }
+      nav ul.active { transform: translateY(0); }
+      .hero h1 { font-size: 2.1rem; }
+      .hero p { font-size: 1rem; }
+      .btn { display: block; max-width: 300px; margin: 10px auto; }
+      h2 { font-size: 1.9rem; }
+    }
+  </style>
+</head>
+<body>
+<header>
+  <div class="container header-inner">
+    <div class="logo">
+      <img src="logo.png" alt="Logo SMK Muhammadiyah Bintan">
+      SMK Muhammadiyah Bintan
+    </div>
+    <div class="menu-toggle" onclick="document.querySelector('nav ul').classList.toggle('active')">☰</div>
+    <nav>
+      <ul>
+        <li><a href="#">Beranda</a></li>
+        <li><a href="#">Profil</a></li>
+        <li><a href="#">Akademik</a></li>
+        <li><a href="#">Berita</a></li>
+        <li><a href="#">PPDB</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<section class="hero">
+  <div class="container">
+    <h1>SMK Muhammadiyah Bintan</h1>
+    <p>Unggul dalam Prestasi, Berakhlak Mulia</p>
+    <a href="#" class="btn">Profil Sekolah</a>
+    <a href="#" class="btn alt">PPDB</a>
+  </div>
+</section>
+<section>
+  <div class="container">
+    <h2>Keunggulan Sekolah</h2>
+    <div class="grid">
+      <div class="card">
+        <img src="icon-guru.png" alt="">
+        <h3>Guru Profesional</h3>
+        <p>Tenaga pendidik berpengalaman dan bersertifikasi.</p>
+      </div>
+      <div class="card">
+        <img src="icon-lingkungan.png" alt="">
+        <h3>Lingkungan Nyaman</h3>
+        <p>Sekolah bersih, aman, dan kondusif.</p>
+      </div>
+      <div class="card">
+        <img src="icon-prestasi.png" alt="">
+        <h3>Prestasi</h3>
+        <p>Akademik dan non-akademik tingkat daerah.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<footer>
+  <p>© 2026 SMK Muhammadiyah Bintan</p>
+</footer>
+</body>
+</html>
