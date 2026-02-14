@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#2E7D32">
 <title>SMK Muhammadiyah Bintan</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -32,21 +33,6 @@ body {
   overflow-x: hidden;
 }
 
-img {
-  max-width: 100%;
-  display: block;
-}
-
-h1, h2, h3 {
-  font-family: 'Roboto', sans-serif;
-}
-
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
 /* ================= HEADER ================= */
 header {
   background: var(--hijau-tua);
@@ -60,13 +46,13 @@ header {
 }
 
 .header-inner {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 70px;
-  padding: 0 20px;
   max-width: 1200px;
+  height: 70px;
   margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .logo {
@@ -79,7 +65,6 @@ header {
 .logo img {
   height: 48px;
   width: 48px;
-  object-fit: contain;
   border-radius: 50%;
   background: white;
   padding: 2px;
@@ -99,28 +84,15 @@ header {
   opacity: 0.85;
 }
 
-.menu-toggle {
-  display: none;
-  background: none;
-  border: none;
-  color: white;
-  font-size: 1.6rem;
-  cursor: pointer;
-}
-
-/* NAV DESKTOP */
 nav ul {
   list-style: none;
   display: flex;
-  align-items: center;
   gap: 8px;
 }
 
 nav a {
   color: white;
-  font-weight: 500;
   text-decoration: none;
-  font-size: 0.9rem;
   padding: 6px 12px;
   border-radius: 6px;
   transition: background 0.2s;
@@ -139,7 +111,7 @@ nav a.ppdb-link {
 
 /* ================= HERO ================= */
 .hero {
-  margin-top: 70px; /* turun tepat di bawah header */
+  margin-top: 70px;
   background:
     linear-gradient(rgba(46,125,50,.55), rgba(46,125,50,.55)),
     url('hero.png') center/cover no-repeat;
@@ -149,6 +121,7 @@ nav a.ppdb-link {
 }
 
 .hero h1 {
+  font-family: 'Roboto', sans-serif;
   font-size: 3rem;
   margin-bottom: 15px;
 }
@@ -182,6 +155,12 @@ nav a.ppdb-link {
 /* ================= SECTION ================= */
 section {
   padding: 80px 0;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
 }
 
 h2 {
@@ -221,34 +200,19 @@ footer {
 /* ================= MOBILE ================= */
 @media (max-width: 768px) {
 
-  .menu-toggle {
-    display: block;
-  }
-
-  nav {
-    position: fixed;
-    top: 70px;
-    left: 0;
-    right: 0;
-    background: var(--hijau-tua);
-    transform: translateY(-130%);
-    transition: transform 0.3s ease;
-    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
-  }
-
-  nav.active {
-    transform: translateY(0);
-  }
-
   nav ul {
     flex-direction: column;
+    background: var(--hijau-tua);
+    position: absolute;
+    top: 70px;
+    left: 0;
+    width: 100%;
     padding: 20px;
+    display: none;
   }
 
-  nav a {
-    width: 100%;
-    text-align: center;
-    padding: 10px;
+  nav ul.active {
+    display: flex;
   }
 
   .hero h1 {
@@ -259,17 +223,10 @@ footer {
     font-size: 1rem;
   }
 
-  .btn {
-    display: block;
-    max-width: 280px;
-    margin: 10px auto;
-  }
-
   h2 {
     font-size: 1.8rem;
   }
 }
-
 </style>
 </head>
 
@@ -277,22 +234,20 @@ footer {
 
 <header>
   <div class="header-inner">
-    <a href="index.html" class="logo">
-      <img src="logo.png" alt="Logo SMK Muhammadiyah Bintan">
+    <a href="#" class="logo">
+      <img src="logo.png" alt="Logo">
       <div class="logo-text">
         SMK Muhammadiyah Bintan
         <span>Kepulauan Riau</span>
       </div>
     </a>
 
-    <button class="menu-toggle" onclick="document.getElementById('mainNav').classList.toggle('active')">☰</button>
-
-    <nav id="mainNav">
+    <nav>
       <ul>
-        <li><a href="index.html">Beranda</a></li>
-        <li><a href="profil.html">Profil</a></li>
-        <li><a href="berita.html">Berita</a></li>
-        <li><a href="ppdb.html" class="ppdb-link">PPDB</a></li>
+        <li><a href="#">Beranda</a></li>
+        <li><a href="#">Profil</a></li>
+        <li><a href="#">Berita</a></li>
+        <li><a href="#" class="ppdb-link">PPDB</a></li>
       </ul>
     </nav>
   </div>
@@ -303,7 +258,7 @@ footer {
     <h1>SMK Muhammadiyah Bintan</h1>
     <p>Unggul dalam Prestasi, Berakhlak Mulia</p>
     <a href="#" class="btn">Profil Sekolah</a>
-    <a href="ppdb.html" class="btn alt">PPDB</a>
+    <a href="#" class="btn alt">PPDB</a>
   </div>
 </section>
 
