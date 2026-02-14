@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profil - SMK Muhammadiyah Bintan</title>
+  <style>
+    :root {
+      --hijau-tua: #2E7D32;
+      --hijau: #4CAF50;
+      --hijau-muda: #A5D6A7;
+      --hijau-pale: #E8F5E9;
+      --emas: #F9A825;
+      --abu-gelap: #263238;
+      --abu: #546E7A;
+      --putih: #ffffff;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: Arial, sans-serif; background: #f5f5f5; color: var(--abu-gelap); overflow-x: hidden; }
+
+    /* HEADER */
+    header { background: var(--hijau-tua); position: sticky; top: 0; z-index: 1000; width: 100%; }
+    .header-inner {
+      display: flex; justify-content: space-between; align-items: center;
+      height: 65px; padding: 0 20px; max-width: 1200px; margin: 0 auto;
+    }
+    .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+    .logo img { height: 48px; width: 48px; object-fit: contain; border-radius: 50%; background: white; padding: 2px; }
+    .logo-text { color: white; font-weight: 700; font-size: 1rem; line-height: 1.3; }
+    .logo-text span { display: block; font-size: 0.75rem; font-weight: 400; opacity: 0.85; }
+    .menu-toggle { display: none; background: none; border: none; color: white; font-size: 1.6rem; cursor: pointer; }
+    nav ul { list-style: none; display: flex; align-items: center; gap: 6px; }
+    nav a { color: white; font-weight: 500; text-decoration: none; font-size: 0.9rem; padding: 6px 12px; border-radius: 6px; transition: background 0.2s; }
+    nav a:hover { background: rgba(255,255,255,0.15); }
+    nav a.active { background: rgba(255,255,255,0.2); }
+    nav a.ppdb-link { background: var(--hijau); border-radius: 20px; padding: 6px 16px; font-weight: 600; }
+
+    /* HERO */
+    .page-hero {
+      background: linear-gradient(135deg, var(--hijau-tua), var(--hijau));
+      padding: 50px 20px 60px; text-align: center; position: relative;
+    }
+    .page-hero::after {
+      content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+      height: 40px; background: #f5f5f5;
+      clip-path: ellipse(55% 100% at 50% 100%);
+    }
+    .page-hero h1 { color: white; font-size: 26px; margin-bottom: 8px; }
+    .page-hero p { color: rgba(255,255,255,0.8); font-size: 14px; }
+
+    /* SECTION */
+    .sec { padding: 40px 20px; max-width: 900px; margin: 0 auto; }
+    .sec-title { text-align: center; margin-bottom: 28px; }
+    .sec-title .tag {
+      display: inline-block; background: var(--hijau-pale); color: var(--hijau-tua);
+      font-size: 11px; font-weight: 700; letter-spacing: 2px;
+      padding: 5px 14px; border-radius: 50px; margin-bottom: 10px;
+    }
+    .sec-title h2 { font-size: 22px; color: var(--hijau-tua); }
+
+    /* INFO SEKOLAH */
+    .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .info-card {
+      background: white; border-radius: 14px; padding: 20px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+      display: flex; align-items: flex-start; gap: 14px;
+    }
+    .info-card .ic {
+      width: 42px; height: 42px; background: var(--hijau-pale);
+      border-radius: 10px; display: flex; align-items: center;
+      justify-content: center; font-size: 20px; flex-shrink: 0;
+    }
+    .info-card .info-text label { font-size: 11px; color: var(--abu); font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
+    .info-card .info-text p { font-size: 14px; color: var(--abu-gelap); font-weight: 600; margin-top: 3px; }
+
+    /* KEPALA SEKOLAH */
+    .kepsek-box {
+      background: white; border-radius: 16px; padding: 30px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+      display: flex; align-items: center; gap: 24px;
+    }
+    .kepsek-avatar {
+      width: 90px; height: 90px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--hijau-tua), var(--hijau));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 36px; flex-shrink: 0;
+    }
+    .kepsek-info h3 { font-size: 20px; color: var(--hijau-tua); margin-bottom: 6px; }
+    .kepsek-info .jabatan {
+      display: inline-block; background: var(--hijau-pale); color: var(--hijau-tua);
+      font-size: 12px; font-weight: 700; padding: 4px 14px; border-radius: 50px;
+      margin-bottom: 10px;
+    }
+    .kepsek-info p { font-size: 14px; color: var(--abu); line-height: 1.6; }
+
+    /* VISI MISI */
+    .visi-box {
+      background: linear-gradient(135deg, var(--hijau-tua), var(--hijau));
+      border-radius: 16px; padding: 30px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    .visi-box .label { 
+      display: inline-block; background: var(--emas); color: var(--abu-gelap);
+      font-size: 12px; font-weight: 800; letter-spacing: 3px;
+      padding: 5px 20px; border-radius: 50px; margin-bottom: 16px;
+    }
+    .visi-box p { color: white; font-size: 18px; font-weight: 700; font-style: italic; line-height: 1.5; }
+
+    .misi-box {
+      background: white; border-radius: 16px; padding: 30px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+    }
+    .misi-box .label {
+      display: inline-block; background: var(--hijau-pale); color: var(--hijau-tua);
+      font-size: 12px; font-weight: 800; letter-spacing: 3px;
+      padding: 5px 20px; border-radius: 50px; margin-bottom: 20px;
+    }
+    .misi-list { list-style: none; }
+    .misi-list li {
+      display: flex; align-items: flex-start; gap: 12px;
+      padding: 12px 0; border-bottom: 1px solid var(--hijau-pale);
+      font-size: 14px; color: var(--abu-gelap); line-height: 1.6;
+    }
+    .misi-list li:last-child { border-bottom: none; }
+    .misi-list li .arrow {
+      width: 24px; height: 24px; background: var(--emas);
+      border-radius: 50%; display: flex; align-items: center;
+      justify-content: center; font-size: 12px; flex-shrink: 0; margin-top: 1px;
+    }
+
+    /* KONTAK */
+    .kontak-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .kontak-card {
+      background: white; border-radius: 14px; padding: 20px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+      text-align: center;
+    }
+    .kontak-card .ic { font-size: 28px; margin-bottom: 10px; }
+    .kontak-card label { font-size: 11px; color: var(--abu); font-weight: 700; letter-spacing: 1px; text-transform: uppercase; display: block; margin-bottom: 6px; }
+    .kontak-card p { font-size: 14px; color: var(--hijau-tua); font-weight: 600; }
+
+    /* MAPS */
+    .maps-box {
+      background: white; border-radius: 16px; overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+    }
+    .maps-box iframe { width: 100%; height: 280px; border: none; display: block; }
+
+    .divider { height: 2px; background: linear-gradient(to right, transparent, var(--hijau-muda), transparent); margin: 0 30px; }
+
+    /* FOOTER */
+    footer { background: var(--hijau-tua); color: white; text-align: center; padding: 30px 20px; font-size: 14px; }
+
+    @media (max-width: 768px) {
+      .menu-toggle { display: block; }
+      nav {
+        position: fixed; top: 65px; left: 0; right: 0;
+        background: var(--hijau-tua); z-index: 999;
+        transform: translateY(-130%); transition: transform 0.3s ease;
+        box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+      }
+      nav.active { transform: translateY(0); }
+      nav ul { flex-direction: column; align-items: center; padding: 20px; gap: 6px; }
+      nav a { width: 100%; text-align: center; padding: 10px; }
+      nav a.ppdb-link { width: auto; padding: 8px 24px; }
+      .info-grid, .kontak-grid { grid-template-columns: 1fr; }
+      .kepsek-box { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <img src="logo.png" alt="Logo">
+      <div class="logo-text">SMK Muhammadiyah Bintan<span>Kepulauan Riau</span></div>
+    </a>
+    <button class="menu-toggle" onclick="document.getElementById('mainNav').classList.toggle('active')">☰</button>
+    <nav id="mainNav">
+      <ul>
+        <li><a href="index.html">Beranda</a></li>
+        <li><a href="profil.html" class="active">Profil</a></li>
+        <li><a href="berita.html">Berita</a></li>
+        <li><a href="ppdb.html" class="ppdb-link">PPDB</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div class="page-hero">
+  <h1>🏫 Profil Sekolah</h1>
+  <p>Mengenal lebih dekat SMK Muhammadiyah Bintan</p>
+</div>
+
+<!-- INFO SEKOLAH -->
+<div class="sec">
+  <div class="sec-title">
+    <div class="tag">📋 IDENTITAS</div>
+    <h2>Informasi Sekolah</h2>
+  </div>
+  <div class="info-grid">
+    <div class="info-card">
+      <div class="ic">🏫</div>
+      <div class="info-text">
+        <label>Nama Sekolah</label>
+        <p>SMKS Muhammadiyah Bintan</p>
+      </div>
+    </div>
+    <div class="info-card">
+      <div class="ic">🔢</div>
+      <div class="info-text">
+        <label>NPSN</label>
+        <p>11002262</p>
+      </div>
+    </div>
+    <div class="info-card">
+      <div class="ic">📍</div>
+      <div class="info-text">
+        <label>Alamat</label>
+        <p>Jl. Mekar Sari No.3, Tanjung Uban Timur, Bintan Utara</p>
+      </div>
+    </div>
+    <div class="info-card">
+      <div class="ic">🗺️</div>
+      <div class="info-text">
+        <label>Kabupaten/Provinsi</label>
+        <p>Kab. Bintan, Kepulauan Riau</p>
+      </div>
+    </div>
+    <div class="info-card">
+      <div class="ic">📞</div>
+      <div class="info-text">
+        <label>Telepon</label>
+        <p>0771-483323</p>
+      </div>
+    </div>
+    <div class="info-card">
+      <div class="ic">✉️</div>
+      <div class="info-text">
+        <label>Email</label>
+        <p>esemkamu@yahoo.com</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- KEPALA SEKOLAH -->
+<div class="sec">
+  <div class="sec-title">
+    <div class="tag">👤 PIMPINAN</div>
+    <h2>Kepala Sekolah</h2>
+  </div>
+  <div class="kepsek-box">
+    <div class="kepsek-avatar">👩‍💼</div>
+    <div class="kepsek-info">
+      <h3>Elvirahmi, S.E</h3>
+      <div class="jabatan">Kepala Sekolah</div>
+      <p>Memimpin SMKS Muhammadiyah Bintan dengan dedikasi tinggi dalam mewujudkan insan bertakwa, terampil, mandiri, dan berdaya saing di dunia usaha dan industri.</p>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- VISI MISI -->
+<div class="sec">
+  <div class="sec-title">
+    <div class="tag">🎯 VISI & MISI</div>
+    <h2>Visi dan Misi Sekolah</h2>
+  </div>
+
+  <div class="visi-box">
+    <div class="label">VISI</div>
+    <p>"Mewujudkan insan bertakwa, terampil, mandiri, berdaya saing di dunia usaha/industri"</p>
+  </div>
+
+  <div class="misi-box">
+    <div class="label">MISI</div>
+    <ul class="misi-list">
+      <li>
+        <div class="arrow">▶</div>
+        Mendidik siswa dengan keyakinan tauhid yang murni berdasarkan Al-Qur'an dan As-Sunnah sehingga terwujud masyarakat Islam yang sebenar-benarnya
+      </li>
+      <li>
+        <div class="arrow">▶</div>
+        Menjadikan siswa yang terampil dalam mengasah keahlian sesuai dengan kompetensinya
+      </li>
+      <li>
+        <div class="arrow">▶</div>
+        Menanamkan budaya disiplin dan bekermajuan sebagai falsafah hidup bagi seluruh elemen sekolah
+      </li>
+      <li>
+        <div class="arrow">▶</div>
+        Menerapkan sistem manajemen sekolah berlandaskan kekeluargaan yang islami
+      </li>
+      <li>
+        <div class="arrow">▶</div>
+        Menciptakan lingkungan belajar yang kondusif, dinamis, dan produktif
+      </li>
+      <li>
+        <div class="arrow">▶</div>
+        Menerapkan standar pelayanan prima sesuai dengan perkembangan dunia usaha dan industri
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- KONTAK -->
+<div class="sec">
+  <div class="sec-title">
+    <div class="tag">📞 KONTAK</div>
+    <h2>Hubungi Kami</h2>
+  </div>
+  <div class="kontak-grid" style="margin-bottom:20px;">
+    <div class="kontak-card">
+      <div class="ic">📞</div>
+      <label>Telepon</label>
+      <p>0771-483323</p>
+    </div>
+    <div class="kontak-card">
+      <div class="ic">✉️</div>
+      <label>Email</label>
+      <p>esemkamu@yahoo.com</p>
+    </div>
+    <div class="kontak-card">
+      <div class="ic">💬</div>
+      <label>WhatsApp (Amar)</label>
+      <p><a href="https://wa.me/6285173334099" style="color:var(--hijau-tua);text-decoration:none;">0851-7333-4099</a></p>
+    </div>
+    <div class="kontak-card">
+      <div class="ic">💬</div>
+      <label>WhatsApp (Andres)</label>
+      <p><a href="https://wa.me/6283188851492" style="color:var(--hijau-tua);text-decoration:none;">0831-8885-1492</a></p>
+    </div>
+  </div>
+
+  <!-- MAPS -->
+  <div class="maps-box">
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.6!2d104.2!3d1.15!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zSmwuIE1la2FyIFNhcmkgTm8uMywgVGFuanVuZyBVYmFuIFRpbXVyLCBCaW50YW4gVXRhcmE!5e0!3m2!1sid!2sid!4v1"
+      allowfullscreen="" loading="lazy">
+    </iframe>
+  </div>
+</div>
+
+<footer>
+  <p>© 2026 SMK Muhammadiyah Bintan</p>
+</footer>
+
+</body>
+</html>
