@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin - SMK Muhammadiyah Bintan</title>
+  <style>
+    :root {
+      --hijau-tua: #2E7D32;
+      --hijau: #4CAF50;
+      --hijau-pale: #E8F5E9;
+      --abu-gelap: #263238;
+      --abu: #546E7A;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: Arial, sans-serif; background: #f0f7f0; color: var(--abu-gelap); min-height: 100vh; }
+
+    /* LOGIN */
+    .login-wrap {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: linear-gradient(135deg, #1B5E20, #2E7D32, #4CAF50);
+    }
+    .login-box {
+      background: white;
+      border-radius: 20px;
+      padding: 40px 32px;
+      width: 100%;
+      max-width: 380px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+      text-align: center;
+    }
+    .login-box .logo-icon {
+      font-size: 48px;
+      margin-bottom: 10px;
+    }
+    .login-box h2 {
+      color: var(--hijau-tua);
+      font-size: 20px;
+      margin-bottom: 6px;
+    }
+    .login-box p {
+      color: var(--abu);
+      font-size: 13px;
+      margin-bottom: 28px;
+    }
+    .login-box input {
+      width: 100%;
+      padding: 13px 16px;
+      border: 2px solid #E8F5E9;
+      border-radius: 10px;
+      font-size: 15px;
+      text-align: center;
+      letter-spacing: 3px;
+      outline: none;
+      margin-bottom: 16px;
+      transition: border-color 0.2s;
+    }
+    .login-box input:focus { border-color: var(--hijau); }
+    .login-box button {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(135deg, var(--hijau-tua), var(--hijau));
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .login-error {
+      color: #c62828;
+      font-size: 13px;
+      margin-top: 12px;
+      display: none;
+    }
+
+    /* ADMIN PANEL */
+    .admin-panel { display: none; }
+
+    .admin-header {
+      background: var(--hijau-tua);
+      padding: 0 20px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .admin-header h1 { color: white; font-size: 16px; }
+    .admin-header button {
+      background: rgba(255,255,255,0.2);
+      color: white;
+      border: none;
+      padding: 7px 16px;
+      border-radius: 20px;
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    .admin-body {
+      max-width: 700px;
+      margin: 30px auto;
+      padding: 0 20px 60px;
+    }
+
+    .panel-title {
+      font-size: 20px;
+      color: var(--hijau-tua);
+      font-weight: 700;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 3px solid var(--hijau-pale);
+    }
+
+    .form-box {
+      background: white;
+      border-radius: 16px;
+      padding: 28px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+      margin-bottom: 30px;
+    }
+
+    .fg {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 18px;
+    }
+    .fg label {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--abu-gelap);
+    }
+    .fg input, .fg select, .fg textarea {
+      padding: 12px 14px;
+      border: 2px solid #E8F5E9;
+      border-radius: 10px;
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+      color: var(--abu-gelap);
+      background: #fafafa;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .fg input:focus, .fg select:focus, .fg textarea:focus {
+      border-color: var(--hijau);
+      background: white;
+    }
+    .fg textarea { height: 200px; resize: vertical; }
+    .fg .hint { font-size: 11px; color: var(--abu); margin-top: 3px; }
+
+    .foto-preview {
+      width: 100%;
+      max-height: 200px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-top: 10px;
+      display: none;
+    }
+
+    .btn-posting {
+      width: 100%;
+      padding: 16px;
+      background: linear-gradient(135deg, var(--hijau-tua), var(--hijau));
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .btn-posting:disabled { opacity: 0.6; cursor: not-allowed; }
+
+    .notif {
+      display: none;
+      padding: 14px 18px;
+      border-radius: 10px;
+      margin-top: 16px;
+      font-size: 14px;
+      font-weight: 600;
+      text-align: center;
+    }
+    .notif.success { background: #E8F5E9; color: #1B5E20; border: 2px solid #A5D6A7; }
+    .notif.error { background: #FFEBEE; color: #B71C1C; border: 2px solid #FFCDD2; }
+
+    /* DAFTAR BERITA */
+    .berita-list { display: flex; flex-direction: column; gap: 12px; }
+    .berita-item {
+      background: white;
+      border-radius: 12px;
+      padding: 16px 18px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .berita-item .bi-foto {
+      width: 60px; height: 60px;
+      border-radius: 8px;
+      object-fit: cover;
+      background: var(--hijau-pale);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 24px;
+      flex-shrink: 0;
+    }
+    .berita-item .bi-foto img { width: 60px; height: 60px; border-radius: 8px; object-fit: cover; }
+    .berita-item .bi-info { flex: 1; }
+    .berita-item .bi-info h4 { font-size: 14px; color: var(--abu-gelap); margin-bottom: 4px; }
+    .berita-item .bi-info span {
+      font-size: 11px; color: var(--abu);
+      background: var(--hijau-pale);
+      padding: 2px 10px;
+      border-radius: 50px;
+      margin-right: 6px;
+    }
+
+    .loading-list {
+      text-align: center;
+      padding: 30px;
+      color: var(--abu);
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div class="login-wrap" id="loginWrap">
+  <div class="login-box">
+    <div class="logo-icon">🔐</div>
+    <h2>Admin Panel</h2>
+    <p>SMK Muhammadiyah Bintan<br>Masukkan password untuk melanjutkan</p>
+    <input type="password" id="passwordInput" placeholder="Password" onkeydown="if(event.key==='Enter') cekPassword()">
+    <button onclick="cekPassword()">Masuk →</button>
+    <div class="login-error" id="loginError">❌ Password salah! Coba lagi.</div>
+  </div>
+</div>
+
+<!-- ADMIN PANEL -->
+<div class="admin-panel" id="adminPanel">
+  <div class="admin-header">
+    <h1>⚙️ Admin Panel — SMK Muhammadiyah Bintan</h1>
+    <button onclick="keluar()">Keluar</button>
+  </div>
+
+  <div class="admin-body">
+
+    <!-- FORM POSTING -->
+    <div class="panel-title">📝 Posting Berita Baru</div>
+    <div class="form-box">
+      <div class="fg">
+        <label>Judul Berita *</label>
+        <input type="text" id="judul" placeholder="Masukkan judul berita">
+      </div>
+      <div class="fg">
+        <label>Kategori *</label>
+        <select id="kategori">
+          <option value="">-- Pilih Kategori --</option>
+          <option>Kegiatan</option>
+          <option>Prestasi</option>
+          <option>Pengumuman</option>
+          <option>PPDB</option>
+        </select>
+      </div>
+      <div class="fg">
+        <label>Nama Penulis</label>
+        <input type="text" id="penulis" placeholder="Nama guru/admin (opsional)">
+      </div>
+      <div class="fg">
+        <label>Link Foto (opsional)</label>
+        <input type="text" id="foto" placeholder="https://link-foto.jpg" oninput="previewFoto()">
+        <div class="hint">💡 Upload foto ke Google Drive/Photos → klik kanan → Salin link gambar → paste di sini</div>
+        <img id="fotoPreview" class="foto-preview" alt="Preview foto">
+      </div>
+      <div class="fg">
+        <label>Isi Berita *</label>
+        <textarea id="isi" placeholder="Tulis isi berita di sini... (paste dari WhatsApp/dokumen pun bisa!)"></textarea>
+      </div>
+      <button class="btn-posting" id="btnPosting" onclick="postingBerita()">🚀 Posting Berita</button>
+      <div class="notif" id="notif"></div>
+    </div>
+
+    <!-- DAFTAR BERITA -->
+    <div class="panel-title">📋 Berita Yang Sudah Diposting</div>
+    <div id="daftarBerita">
+      <div class="loading-list">Memuat daftar berita...</div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwKcnzcELjNpGA_Ry-80QdEzl-QfnxKndWpIvwABBmd0DYLB7RLyyXVb7VpzcW8M3ciVg/exec';
+  const PASSWORD = 'pagar###';
+
+  function cekPassword() {
+    const input = document.getElementById('passwordInput').value;
+    if (input === PASSWORD) {
+      document.getElementById('loginWrap').style.display = 'none';
+      document.getElementById('adminPanel').style.display = 'block';
+      muatDaftarBerita();
+    } else {
+      document.getElementById('loginError').style.display = 'block';
+      document.getElementById('passwordInput').value = '';
+    }
+  }
+
+  function keluar() {
+    document.getElementById('loginWrap').style.display = 'flex';
+    document.getElementById('adminPanel').style.display = 'none';
+    document.getElementById('passwordInput').value = '';
+  }
+
+  function previewFoto() {
+    const url = document.getElementById('foto').value;
+    const preview = document.getElementById('fotoPreview');
+    if (url) {
+      preview.src = url;
+      preview.style.display = 'block';
+    } else {
+      preview.style.display = 'none';
+    }
+  }
+
+  function postingBerita() {
+    const judul = document.getElementById('judul').value.trim();
+    const kategori = document.getElementById('kategori').value;
+    const isi = document.getElementById('isi').value.trim();
+    const penulis = document.getElementById('penulis').value.trim();
+    const foto = document.getElementById('foto').value.trim();
+
+    if (!judul || !kategori || !isi) {
+      tampilNotif('error', '⚠️ Judul, kategori, dan isi berita wajib diisi!');
+      return;
+    }
+
+    const btn = document.getElementById('btnPosting');
+    btn.disabled = true;
+    btn.textContent = '⏳ Memposting...';
+
+    const now = new Date();
+    const tanggal = now.toLocaleDateString('id-ID', {day:'numeric', month:'long', year:'numeric'});
+
+    const data = { judul, kategori, isi, penulis, foto, tanggal };
+
+    fetch(SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    })
+    .then(() => {
+      tampilNotif('success', '✅ Berita berhasil diposting! Akan muncul di website dalam beberapa detik.');
+      btn.textContent = '✅ Berhasil Diposting!';
+      document.getElementById('judul').value = '';
+      document.getElementById('kategori').value = '';
+      document.getElementById('isi').value = '';
+      document.getElementById('penulis').value = '';
+      document.getElementById('foto').value = '';
+      document.getElementById('fotoPreview').style.display = 'none';
+      setTimeout(() => {
+        btn.disabled = false;
+        btn.textContent = '🚀 Posting Berita';
+        muatDaftarBerita();
+      }, 3000);
+    })
+    .catch(() => {
+      tampilNotif('error', '❌ Gagal posting. Cek koneksi internet dan coba lagi.');
+      btn.disabled = false;
+      btn.textContent = '🚀 Posting Berita';
+    });
+  }
+
+  function tampilNotif(tipe, pesan) {
+    const notif = document.getElementById('notif');
+    notif.className = 'notif ' + tipe;
+    notif.textContent = pesan;
+    notif.style.display = 'block';
+    notif.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  function muatDaftarBerita() {
+    fetch(SCRIPT_URL)
+      .then(r => r.json())
+      .then(res => {
+        if (res.status === 'success' && res.data.length > 0) {
+          let html = '<div class="berita-list">';
+          res.data.forEach(b => {
+            const fotoHtml = b.foto
+              ? `<div class="bi-foto"><img src="${b.foto}" onerror="this.parentElement.innerHTML='📰'"></div>`
+              : `<div class="bi-foto">📰</div>`;
+            html += `
+              <div class="berita-item">
+                ${fotoHtml}
+                <div class="bi-info">
+                  <h4>${b.judul}</h4>
+                  <span>${b.kategori}</span>
+                  <span>${b.tanggal}</span>
+                </div>
+              </div>`;
+          });
+          html += '</div>';
+          document.getElementById('daftarBerita').innerHTML = html;
+        } else {
+          document.getElementById('daftarBerita').innerHTML = '<div class="loading-list">Belum ada berita diposting.</div>';
+        }
+      })
+      .catch(() => {
+        document.getElementById('daftarBerita').innerHTML = '<div class="loading-list">Gagal memuat daftar berita.</div>';
+      });
+  }
+</script>
+</body>
+</html>
