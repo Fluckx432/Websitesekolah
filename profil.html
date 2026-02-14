@@ -153,18 +153,35 @@
     /* FOOTER */
     footer { background: var(--hijau-tua); color: white; text-align: center; padding: 30px 20px; font-size: 14px; }
 
+    .overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 998; }
+    .overlay.active { display: block; }
+    .nav-header { display: none; }
+
     @media (max-width: 768px) {
       .menu-toggle { display: block; }
       nav {
-        position: fixed; top: 65px; left: 0; right: 0;
-        background: var(--hijau-tua); z-index: 999;
-        transform: translateY(-130%); transition: transform 0.3s ease;
-        box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+        position: fixed; top: 0; right: 0; bottom: 0;
+        width: 75%; max-width: 280px;
+        background: #1B5E20; z-index: 999;
+        transform: translateX(100%); transition: transform 0.3s ease;
+        box-shadow: -6px 0 20px rgba(0,0,0,0.3);
+        display: flex; flex-direction: column; overflow: hidden;
       }
-      nav.active { transform: translateY(0); }
-      nav ul { flex-direction: column; align-items: center; padding: 20px; gap: 6px; }
-      nav a { width: 100%; text-align: center; padding: 10px; }
-      nav a.ppdb-link { width: auto; padding: 8px 24px; }
+      nav.active { transform: translateX(0); }
+      .nav-header { display: flex; align-items: center; gap: 12px; padding: 24px 20px 20px; border-bottom: 1px solid rgba(255,255,255,0.15); background: rgba(0,0,0,0.15); }
+      .nav-header img { width: 42px; height: 42px; border-radius: 50%; background: white; padding: 2px; object-fit: contain; }
+      .nav-header-text { color: white; font-size: 0.82rem; font-weight: 700; line-height: 1.3; }
+      .nav-header-text span { display: block; font-size: 0.7rem; font-weight: 400; opacity: 0.75; }
+      nav ul { flex-direction: column; align-items: flex-start; padding: 16px 14px; gap: 4px; flex: 1; }
+      nav ul li { width: 100%; }
+      nav ul li.divider { height: 1px; background: rgba(255,255,255,0.12); margin: 8px 6px; width: calc(100% - 12px); }
+      nav a { width: 100%; text-align: left; padding: 13px 16px; border-radius: 10px; font-size: 0.95rem; display: flex; align-items: center; gap: 12px; }
+      nav a:hover { background: rgba(255,255,255,0.12); }
+      nav a .nav-icon { font-size: 1.1rem; width: 24px; text-align: center; }
+      nav a.active-page { background: rgba(255,255,255,0.18); font-weight: 700; }
+      nav a.ppdb-link { background: rgba(76,175,80,0.3); font-weight: 600; border: 1px solid rgba(76,175,80,0.5); }
+      nav a.ppdb-link:hover { background: rgba(76,175,80,0.5); }
+      .nav-footer { padding: 16px 20px; border-top: 1px solid rgba(255,255,255,0.12); color: rgba(255,255,255,0.5); font-size: 11px; text-align: center; }
       .info-grid, .kontak-grid { grid-template-columns: 1fr; }
       .kepsek-box { flex-direction: column; text-align: center; }
     }
@@ -178,17 +195,24 @@
       <img src="logo.png" alt="Logo">
       <div class="logo-text">SMK Muhammadiyah Bintan<span>Kepulauan Riau</span></div>
     </a>
-    <button class="menu-toggle" onclick="document.getElementById('mainNav').classList.toggle('active')">☰</button>
+    <button class="menu-toggle" onclick="toggleNav()">☰</button>
     <nav id="mainNav">
+      <div class="nav-header">
+        <img src="logo.png" alt="Logo">
+        <div class="nav-header-text">SMK Muhammadiyah Bintan<span>Kepulauan Riau</span></div>
+      </div>
       <ul>
-        <li><a href="index.html">Beranda</a></li>
-        <li><a href="profil.html" class="active">Profil</a></li>
-        <li><a href="berita.html">Berita</a></li>
-        <li><a href="ppdb.html" class="ppdb-link">PPDB</a></li>
+        <li><a href="index.html"><span class="nav-icon">🏠</span> Beranda</a></li>
+        <li><a href="profil.html" class="active-page"><span class="nav-icon">🏫</span> Profil</a></li>
+        <li><a href="berita.html"><span class="nav-icon">📰</span> Berita</a></li>
+        <li class="divider"></li>
+        <li><a href="ppdb.html" class="ppdb-link"><span class="nav-icon">🎓</span> PPDB</a></li>
       </ul>
+      <div class="nav-footer">© 2026 SMK Muhammadiyah Bintan</div>
     </nav>
   </div>
 </header>
+<div class="overlay" id="overlay" onclick="toggleNav()"></div>
 
 <div class="page-hero">
   <h1>🏫 Profil Sekolah</h1>
@@ -241,7 +265,7 @@
       <div class="ic">✉️</div>
       <div class="info-text">
         <label>Email</label>
-        <p>esemkamu@yahoo.com</p>
+        <p><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="fe9b8d9b93959f938bbe879f969191d09d9193">[email&#160;protected]</a></p>
       </div>
     </div>
   </div>
@@ -327,7 +351,7 @@
     <div class="kontak-card">
       <div class="ic">✉️</div>
       <label>Email</label>
-      <p>esemkamu@yahoo.com</p>
+      <p><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d3b6a0b6beb8b2bea693aab2bbbcbcfdb0bcbe">[email&#160;protected]</a></p>
     </div>
     <div class="kontak-card">
       <div class="ic">💬</div>
@@ -344,6 +368,7 @@
   <!-- MAPS -->
   <div class="maps-box">
     <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.6!2d104.2!3d1.15!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zSm
       src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.6!2d104.2!3d1.15!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zSmwuIE1la2FyIFNhcmkgTm8uMywgVGFuanVuZyBVYmFuIFRpbXVyLCBCaW50YW4gVXRhcmE!5e0!3m2!1sid!2sid!4v1"
       allowfullscreen="" loading="lazy">
     </iframe>
@@ -354,5 +379,11 @@
   <p>© 2026 SMK Muhammadiyah Bintan</p>
 </footer>
 
+<script>
+  function toggleNav() {
+    document.getElementById('mainNav').classList.toggle('active');
+    document.getElementById('overlay').classList.toggle('active');
+  }
+</script>
 </body>
 </html>
