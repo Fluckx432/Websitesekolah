@@ -294,7 +294,7 @@
 </div>
 
 <script>
-  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwKcnzcELjNpGA_Ry-80QdEzl-QfnxKndWpIvwABBmd0DYLB7RLyyXVb7VpzcW8M3ciVg/exec';
+  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzkNwdtsgbcd2iQrD9coa_JioAc93WcDYW5IU15Bqf6dzKhHtFwIBDsXWJOK3pioTyLYg/exec';
   const PASSWORD = 'pagar###';
 
   function cekPassword() {
@@ -344,15 +344,13 @@
 
     const now = new Date();
     const tanggal = now.toLocaleDateString('id-ID', {
-      day: 'numeric',
-      month: 'long',
-      year: 'numeric'
-    }) + ', ' + now.toLocaleTimeString('id-ID', {
-      hour: '2-digit',
-      minute: '2-digit'
+      day: 'numeric', month: 'long', year: 'numeric'
+    });
+    const jam = now.toLocaleTimeString('id-ID', {
+      hour: '2-digit', minute: '2-digit'
     }) + ' WIB';
 
-    const data = { judul, kategori, isi, penulis, foto, tanggal };
+    const data = { judul, kategori, isi, penulis, foto, tanggal, jam };
 
     fetch(SCRIPT_URL, {
       method: 'POST',
