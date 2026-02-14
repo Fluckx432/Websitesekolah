@@ -343,7 +343,14 @@
     btn.textContent = '⏳ Memposting...';
 
     const now = new Date();
-    const tanggal = now.toLocaleDateString('id-ID', {day:'numeric', month:'long', year:'numeric'});
+    const tanggal = now.toLocaleDateString('id-ID', {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric'
+    }) + ', ' + now.toLocaleTimeString('id-ID', {
+      hour: '2-digit',
+      minute: '2-digit'
+    }) + ' WIB';
 
     const data = { judul, kategori, isi, penulis, foto, tanggal };
 
