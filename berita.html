@@ -348,19 +348,35 @@
 </footer>
 
 <script>
-  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwKcnzcELjNpGA_Ry-80QdEzl-QfnxKndWpIvwABBmd0DYLB7RLyyXVb7VpzcW8M3ciVg/exec';
+  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzkNwdtsgbcd2iQrD9coa_JioAc93WcDYW5IU15Bqf6dzKhHtFwIBDsXWJOK3pioTyLYg/exec';
   let semuaBerita = [];
   let filterAktif = 'semua';
 
   function formatTanggal(tgl) {
+    if (!tgl) return '-';
+    // Kalau sudah format teks Indonesia, tampilkan langsung
+    if (typeof tgl === 'string' && tgl.includes('WIB')) return tgl;
+    if (typeof tgl === 'string' && tgl.includes('Januari') || 
+        typeof tgl === 'string' && tgl.includes('Februari') ||
+        typeof tgl === 'string' && tgl.includes('Maret') ||
+        typeof tgl === 'string' && tgl.includes('April') ||
+        typeof tgl === 'string' && tgl.includes('Mei') ||
+        typeof tgl === 'string' && tgl.includes('Juni') ||
+        typeof tgl === 'string' && tgl.includes('Juli') ||
+        typeof tgl === 'string' && tgl.includes('Agustus') ||
+        typeof tgl === 'string' && tgl.includes('September') ||
+        typeof tgl === 'string' && tgl.includes('Oktober') ||
+        typeof tgl === 'string' && tgl.includes('November') ||
+        typeof tgl === 'string' && tgl.includes('Desember')) {
+      return tgl;
+    }
+    // Konversi format lain
     try {
       const d = new Date(tgl);
       if (isNaN(d.getTime())) return tgl;
       return d.toLocaleDateString('id-ID', {
         day: 'numeric', month: 'long', year: 'numeric'
-      }) + ', ' + d.toLocaleTimeString('id-ID', {
-        hour: '2-digit', minute: '2-digit'
-      }) + ' WIB';
+      });
     } catch(e) { return tgl; }
   }
 
@@ -399,7 +415,7 @@
             <h3>${b.judul}</h3>
             <div class="preview">${b.isi}</div>
             <div class="meta">
-              <span>📅 ${formatTanggal(b.tanggal)}</span>
+              <span>📅 ${b.tanggal}${b.jam ? ', ' + b.jam : ''}</span>
               <span>✍️ ${b.penulis || 'Admin'}</span>
             </div>
           </div>
@@ -425,7 +441,7 @@
     const modal = document.getElementById('modalKonten');
     document.getElementById('mKategori').textContent = b.kategori;
     document.getElementById('mJudul').textContent = b.judul;
-    document.getElementById('mMeta').textContent = `📅 ${formatTanggal(b.tanggal)}  ✍️ ${b.penulis || 'Admin'}`;
+    document.getElementById('mMeta').textContent = `📅 ${b.tanggal}${b.jam ? ', ' + b.jam : ''}  ✍️ ${b.penulis || 'Admin'}`;
     document.getElementById('mIsi').textContent = b.isi;
     if (b.foto) {
       modal.innerHTML = `<img src="${b.foto}" onerror="this.remove()">` + modal.innerHTML.replace(/<img[^>]*>/, '');
@@ -433,7 +449,7 @@
     document.getElementById('modalOverlay').classList.add('show');
     document.getElementById('mKategori').textContent = b.kategori;
     document.getElementById('mJudul').textContent = b.judul;
-    document.getElementById('mMeta').textContent = `📅 ${formatTanggal(b.tanggal)}  ✍️ ${b.penulis || 'Admin'}`;
+    document.getElementById('mMeta').textContent = `📅 ${b.tanggal}${b.jam ? ', ' + b.jam : ''}  ✍️ ${b.penulis || 'Admin'}`;
     document.getElementById('mIsi').textContent = b.isi;
   }
 
