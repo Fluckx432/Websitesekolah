@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Berita - SMK Muhammadiyah Bintan</title>
+  <style>
+    :root {
+      --hijau-tua: #2E7D32;
+      --hijau: #4CAF50;
+      --hijau-muda: #A5D6A7;
+      --hijau-pale: #E8F5E9;
+      --abu-gelap: #263238;
+      --abu: #546E7A;
+      --putih: #ffffff;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: Arial, sans-serif; background: #f5f5f5; color: var(--abu-gelap); overflow-x: hidden; }
+
+    /* HEADER */
+    header {
+      background: var(--hijau-tua);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      width: 100%;
+    }
+    .header-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 65px;
+      padding: 0 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+    .logo img {
+      height: 48px; width: 48px;
+      object-fit: contain;
+      border-radius: 50%;
+      background: white;
+      padding: 2px;
+    }
+    .logo-text { color: white; font-weight: 700; font-size: 1rem; line-height: 1.3; }
+    .logo-text span { display: block; font-size: 0.75rem; font-weight: 400; opacity: 0.85; }
+    .menu-toggle {
+      display: none; background: none; border: none;
+      color: white; font-size: 1.6rem; cursor: pointer;
+    }
+    nav ul { list-style: none; display: flex; align-items: center; gap: 6px; }
+    nav a {
+      color: white; font-weight: 500; text-decoration: none;
+      font-size: 0.9rem; padding: 6px 12px; border-radius: 6px;
+      transition: background 0.2s;
+    }
+    nav a:hover { background: rgba(255,255,255,0.15); }
+    nav a.ppdb-link {
+      background: var(--hijau); border-radius: 20px;
+      padding: 6px 16px; font-weight: 600;
+    }
+    nav a.active { background: rgba(255,255,255,0.2); }
+
+    /* HERO */
+    .page-hero {
+      background: linear-gradient(135deg, var(--hijau-tua), var(--hijau));
+      padding: 50px 20px 60px;
+      text-align: center;
+      position: relative;
+    }
+    .page-hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 40px;
+      background: #f5f5f5;
+      clip-path: ellipse(55% 100% at 50% 100%);
+    }
+    .page-hero h1 { color: white; font-size: 28px; margin-bottom: 8px; }
+    .page-hero p { color: rgba(255,255,255,0.8); font-size: 14px; }
+
+    /* FILTER KATEGORI */
+    .filter-wrap {
+      max-width: 1000px;
+      margin: 30px auto 0;
+      padding: 0 20px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .filter-btn {
+      padding: 8px 20px;
+      border-radius: 50px;
+      border: 2px solid var(--hijau);
+      background: white;
+      color: var(--hijau-tua);
+      font-weight: 600;
+      font-size: 13px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .filter-btn.active, .filter-btn:hover {
+      background: var(--hijau-tua);
+      color: white;
+      border-color: var(--hijau-tua);
+    }
+
+    /* BERITA GRID */
+    .berita-wrap {
+      max-width: 1000px;
+      margin: 30px auto 60px;
+      padding: 0 20px;
+    }
+    .berita-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 24px;
+    }
+    .berita-card {
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.07);
+      transition: transform 0.2s, box-shadow 0.2s;
+      cursor: pointer;
+    }
+    .berita-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+    }
+    .berita-card .foto {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      background: var(--hijau-pale);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 40px;
+    }
+    .berita-card .foto img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+    .berita-card .konten { padding: 18px; }
+    .berita-card .kategori-tag {
+      display: inline-block;
+      background: var(--hijau-pale);
+      color: var(--hijau-tua);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 12px;
+      border-radius: 50px;
+      margin-bottom: 10px;
+      letter-spacing: 1px;
+    }
+    .berita-card h3 {
+      font-size: 15px;
+      color: var(--abu-gelap);
+      margin-bottom: 8px;
+      line-height: 1.4;
+    }
+    .berita-card .preview {
+      font-size: 13px;
+      color: var(--abu);
+      line-height: 1.5;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .berita-card .meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 14px;
+      font-size: 12px;
+      color: var(--abu);
+      border-top: 1px solid #f0f0f0;
+      padding-top: 12px;
+    }
+
+    /* LOADING & EMPTY */
+    .loading {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--abu);
+      font-size: 15px;
+    }
+    .loading .spinner {
+      width: 40px; height: 40px;
+      border: 4px solid var(--hijau-pale);
+      border-top-color: var(--hijau);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin: 0 auto 16px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* MODAL DETAIL */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      z-index: 2000;
+      padding: 20px;
+      overflow-y: auto;
+    }
+    .modal-overlay.show { display: flex; align-items: flex-start; justify-content: center; }
+    .modal {
+      background: white;
+      border-radius: 20px;
+      max-width: 700px;
+      width: 100%;
+      margin-top: 20px;
+      overflow: hidden;
+    }
+    .modal img {
+      width: 100%;
+      max-height: 350px;
+      object-fit: cover;
+    }
+    .modal .modal-body { padding: 28px; }
+    .modal .modal-kategori {
+      display: inline-block;
+      background: var(--hijau-pale);
+      color: var(--hijau-tua);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 12px;
+      border-radius: 50px;
+      margin-bottom: 14px;
+      letter-spacing: 1px;
+    }
+    .modal h2 { font-size: 22px; color: var(--abu-gelap); margin-bottom: 10px; line-height: 1.3; }
+    .modal .modal-meta { font-size: 13px; color: var(--abu); margin-bottom: 18px; }
+    .modal .modal-isi { font-size: 15px; line-height: 1.8; color: var(--abu-gelap); white-space: pre-wrap; }
+    .modal .close-btn {
+      display: block;
+      width: 100%;
+      padding: 14px;
+      background: var(--hijau-tua);
+      color: white;
+      border: none;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 24px;
+      border-radius: 10px;
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--hijau-tua);
+      color: white;
+      text-align: center;
+      padding: 30px 20px;
+      font-size: 14px;
+    }
+
+    @media (max-width: 768px) {
+      .menu-toggle { display: block; }
+      nav {
+        position: fixed;
+        top: 65px; left: 0; right: 0;
+        background: var(--hijau-tua);
+        z-index: 999;
+        transform: translateY(-130%);
+        transition: transform 0.3s ease;
+        box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+      }
+      nav.active { transform: translateY(0); }
+      nav ul { flex-direction: column; align-items: center; padding: 20px; gap: 6px; }
+      nav a { width: 100%; text-align: center; padding: 10px; }
+      nav a.ppdb-link { width: auto; padding: 8px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <img src="logo.png" alt="Logo">
+      <div class="logo-text">
+        SMK Muhammadiyah Bintan
+        <span>Kepulauan Riau</span>
+      </div>
+    </a>
+    <button class="menu-toggle" onclick="document.getElementById('mainNav').classList.toggle('active')">☰</button>
+    <nav id="mainNav">
+      <ul>
+        <li><a href="index.html">Beranda</a></li>
+        <li><a href="#">Profil</a></li>
+        <li><a href="#">Akademik</a></li>
+        <li><a href="berita.html" class="active">Berita</a></li>
+        <li><a href="ppdb.html" class="ppdb-link">PPDB</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div class="page-hero">
+  <h1>📰 Berita & Informasi</h1>
+  <p>Informasi terkini seputar kegiatan SMK Muhammadiyah Bintan</p>
+</div>
+
+<div class="filter-wrap" id="filterWrap">
+  <button class="filter-btn active" onclick="filterBerita('semua', this)">Semua</button>
+  <button class="filter-btn" onclick="filterBerita('Kegiatan', this)">Kegiatan</button>
+  <button class="filter-btn" onclick="filterBerita('Prestasi', this)">Prestasi</button>
+  <button class="filter-btn" onclick="filterBerita('Pengumuman', this)">Pengumuman</button>
+  <button class="filter-btn" onclick="filterBerita('PPDB', this)">PPDB</button>
+</div>
+
+<div class="berita-wrap">
+  <div id="beritaContainer">
+    <div class="loading">
+      <div class="spinner"></div>
+      Memuat berita...
+    </div>
+  </div>
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="tutupModal(event)">
+  <div class="modal" id="modalKonten">
+    <div class="modal-body">
+      <div class="modal-kategori" id="mKategori"></div>
+      <h2 id="mJudul"></h2>
+      <div class="modal-meta" id="mMeta"></div>
+      <div class="modal-isi" id="mIsi"></div>
+      <button class="close-btn" onclick="document.getElementById('modalOverlay').classList.remove('show')">✕ Tutup</button>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>© 2026 SMK Muhammadiyah Bintan</p>
+</footer>
+
+<script>
+  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwKcnzcELjNpGA_Ry-80QdEzl-QfnxKndWpIvwABBmd0DYLB7RLyyXVb7VpzcW8M3ciVg/exec';
+  let semuaBerita = [];
+  let filterAktif = 'semua';
+
+  function muatBerita() {
+    fetch(SCRIPT_URL)
+      .then(r => r.json())
+      .then(res => {
+        if (res.status === 'success') {
+          semuaBerita = res.data;
+          tampilBerita(semuaBerita);
+        } else {
+          document.getElementById('beritaContainer').innerHTML = '<div class="loading">Gagal memuat berita.</div>';
+        }
+      })
+      .catch(() => {
+        document.getElementById('beritaContainer').innerHTML = '<div class="loading">Belum ada berita tersedia.</div>';
+      });
+  }
+
+  function tampilBerita(data) {
+    const container = document.getElementById('beritaContainer');
+    if (data.length === 0) {
+      container.innerHTML = '<div class="loading">📭 Belum ada berita untuk kategori ini.</div>';
+      return;
+    }
+    let html = '<div class="berita-grid">';
+    data.forEach((b, i) => {
+      const fotoHtml = b.foto
+        ? `<div class="foto"><img src="${b.foto}" alt="${b.judul}" onerror="this.parentElement.innerHTML='📰'"></div>`
+        : `<div class="foto">📰</div>`;
+      html += `
+        <div class="berita-card" onclick="bukaModal(${i})">
+          ${fotoHtml}
+          <div class="konten">
+            <div class="kategori-tag">${b.kategori}</div>
+            <h3>${b.judul}</h3>
+            <div class="preview">${b.isi}</div>
+            <div class="meta">
+              <span>📅 ${b.tanggal}</span>
+              <span>✍️ ${b.penulis || 'Admin'}</span>
+            </div>
+          </div>
+        </div>`;
+    });
+    html += '</div>';
+    container.innerHTML = html;
+  }
+
+  function filterBerita(kategori, btn) {
+    filterAktif = kategori;
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    if (kategori === 'semua') {
+      tampilBerita(semuaBerita);
+    } else {
+      tampilBerita(semuaBerita.filter(b => b.kategori === kategori));
+    }
+  }
+
+  function bukaModal(index) {
+    const b = semuaBerita.filter(x => filterAktif === 'semua' || x.kategori === filterAktif)[index];
+    const modal = document.getElementById('modalKonten');
+    document.getElementById('mKategori').textContent = b.kategori;
+    document.getElementById('mJudul').textContent = b.judul;
+    document.getElementById('mMeta').textContent = `📅 ${b.tanggal}  ✍️ ${b.penulis || 'Admin'}`;
+    document.getElementById('mIsi').textContent = b.isi;
+    if (b.foto) {
+      modal.innerHTML = `<img src="${b.foto}" onerror="this.remove()">` + modal.innerHTML.replace(/<img[^>]*>/, '');
+    }
+    document.getElementById('modalOverlay').classList.add('show');
+    document.getElementById('mKategori').textContent = b.kategori;
+    document.getElementById('mJudul').textContent = b.judul;
+    document.getElementById('mMeta').textContent = `📅 ${b.tanggal}  ✍️ ${b.penulis || 'Admin'}`;
+    document.getElementById('mIsi').textContent = b.isi;
+  }
+
+  function tutupModal(e) {
+    if (e.target === document.getElementById('modalOverlay')) {
+      document.getElementById('modalOverlay').classList.remove('show');
+    }
+  }
+
+  muatBerita();
+</script>
+</body>
+</html>
