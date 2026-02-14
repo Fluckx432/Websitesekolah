@@ -6,225 +6,155 @@
 <meta name="theme-color" content="#2E7D32">
 <title>SMK Muhammadiyah Bintan</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
-:root {
-  --hijau-tua: #2E7D32;
-  --hijau: #4CAF50;
-  --hijau-muda: #A5D6A7;
-  --abu: #424242;
-  --putih: #ffffff;
+:root{
+  --hijau-tua:#2E7D32;
+  --hijau:#4CAF50;
+  --hijau-muda:#A5D6A7;
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
 }
 
-body {
-  font-family: 'Poppins', sans-serif;
-  color: var(--abu);
-  background: var(--putih);
-  line-height: 1.6;
-  overflow-x: hidden;
+body{
+  font-family:'Poppins',sans-serif;
+  color:#333;
+  line-height:1.6;
+  overflow-x:hidden;
 }
 
 /* ================= HEADER ================= */
-header {
-  background: var(--hijau-tua);
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 70px;
-  z-index: 1000;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+header{
+  background:var(--hijau-tua);
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:70px;
+  z-index:1000;
+  box-shadow:0 4px 12px rgba(0,0,0,.15);
 }
 
-.header-inner {
-  max-width: 1200px;
-  height: 70px;
-  margin: 0 auto;
-  padding: 0 20px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+.header-inner{
+  max-width:1200px;
+  height:70px;
+  margin:auto;
+  padding:0 20px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  color:white;
 }
 
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  text-decoration: none;
+nav ul{
+  list-style:none;
+  display:flex;
+  gap:15px;
 }
 
-.logo img {
-  height: 48px;
-  width: 48px;
-  border-radius: 50%;
-  background: white;
-  padding: 2px;
-}
-
-.logo-text {
-  color: white;
-  font-weight: 700;
-  font-size: 0.9rem;
-  line-height: 1.3;
-}
-
-.logo-text span {
-  display: block;
-  font-size: 0.75rem;
-  font-weight: 400;
-  opacity: 0.85;
-}
-
-nav ul {
-  list-style: none;
-  display: flex;
-  gap: 8px;
-}
-
-nav a {
-  color: white;
-  text-decoration: none;
-  padding: 6px 12px;
-  border-radius: 6px;
-  transition: background 0.2s;
-}
-
-nav a:hover {
-  background: rgba(255,255,255,0.15);
-}
-
-nav a.ppdb-link {
-  background: var(--hijau);
-  border-radius: 20px;
-  padding: 6px 16px;
-  font-weight: 600;
+nav a{
+  color:white;
+  text-decoration:none;
+  font-weight:500;
 }
 
 /* ================= HERO ================= */
-.hero {
-  margin-top: 70px;
-  background:
-    linear-gradient(rgba(46,125,50,.55), rgba(46,125,50,.55)),
-    url('hero.png') center/cover no-repeat;
-  color: white;
-  text-align: center;
-  padding: 120px 20px 100px;
+.hero{
+  position:relative;
+  margin-top:70px;
+  background:url('hero.png') center/cover no-repeat;
+  color:white;
+  text-align:center;
+  padding:130px 20px 110px;
+  overflow:hidden;
 }
 
-.hero h1 {
-  font-family: 'Roboto', sans-serif;
-  font-size: 3rem;
-  margin-bottom: 15px;
+/* Overlay khusus buat nutup langit terang */
+.hero::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(
+    to bottom,
+    rgba(46,125,50,0.90) 0%,
+    rgba(46,125,50,0.75) 45%,
+    rgba(46,125,50,0.65) 100%
+  );
+  z-index:0;
 }
 
-.hero p {
-  font-size: 1.2rem;
-  margin-bottom: 30px;
+.hero-content{
+  position:relative;
+  z-index:1;
+  max-width:900px;
+  margin:auto;
 }
 
-.btn {
-  display: inline-block;
-  background: var(--hijau);
-  color: white;
-  padding: 14px 34px;
-  border-radius: 50px;
-  font-weight: 600;
-  margin: 8px;
-  text-decoration: none;
-  transition: transform 0.2s ease;
+.hero h1{
+  font-size:3rem;
+  font-weight:700;
+  margin-bottom:20px;
 }
 
-.btn:hover {
-  transform: translateY(-3px);
+.hero p{
+  font-size:1.2rem;
+  margin-bottom:30px;
 }
 
-.btn.alt {
-  background: var(--hijau-muda);
-  color: var(--hijau-tua);
+.btn{
+  display:inline-block;
+  background:var(--hijau);
+  padding:14px 34px;
+  border-radius:50px;
+  color:white;
+  text-decoration:none;
+  font-weight:600;
+  transition:.2s ease;
+}
+
+.btn:hover{
+  transform:translateY(-3px);
 }
 
 /* ================= SECTION ================= */
-section {
-  padding: 80px 0;
+section{
+  padding:80px 20px;
+  max-width:1100px;
+  margin:auto;
+  text-align:center;
 }
 
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
-h2 {
-  text-align: center;
-  font-size: 2.2rem;
-  color: var(--hijau-tua);
-  margin-bottom: 50px;
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 30px;
-}
-
-.card {
-  background: white;
-  padding: 35px 30px;
-  border-radius: 16px;
-  text-align: center;
-  box-shadow: 0 10px 25px rgba(0,0,0,.08);
-}
-
-.card img {
-  height: 80px;
-  margin: 0 auto 20px;
+section h2{
+  font-size:2rem;
+  color:var(--hijau-tua);
+  margin-bottom:30px;
 }
 
 /* ================= FOOTER ================= */
-footer {
-  background: var(--hijau-tua);
-  color: white;
-  text-align: center;
-  padding: 40px 20px;
+footer{
+  background:var(--hijau-tua);
+  color:white;
+  text-align:center;
+  padding:40px 20px;
 }
 
 /* ================= MOBILE ================= */
-@media (max-width: 768px) {
-
-  nav ul {
-    flex-direction: column;
-    background: var(--hijau-tua);
-    position: absolute;
-    top: 70px;
-    left: 0;
-    width: 100%;
-    padding: 20px;
-    display: none;
+@media(max-width:768px){
+  .hero h1{
+    font-size:2rem;
   }
 
-  nav ul.active {
-    display: flex;
+  .hero p{
+    font-size:1rem;
   }
 
-  .hero h1 {
-    font-size: 2rem;
-  }
-
-  .hero p {
-    font-size: 1rem;
-  }
-
-  h2 {
-    font-size: 1.8rem;
+  nav ul{
+    gap:10px;
   }
 }
 </style>
@@ -234,59 +164,33 @@ footer {
 
 <header>
   <div class="header-inner">
-    <a href="#" class="logo">
-      <img src="logo.png" alt="Logo">
-      <div class="logo-text">
-        SMK Muhammadiyah Bintan
-        <span>Kepulauan Riau</span>
-      </div>
-    </a>
-
+    <h3>SMK Muhammadiyah Bintan</h3>
     <nav>
       <ul>
         <li><a href="#">Beranda</a></li>
         <li><a href="#">Profil</a></li>
         <li><a href="#">Berita</a></li>
-        <li><a href="#" class="ppdb-link">PPDB</a></li>
+        <li><a href="#">PPDB</a></li>
       </ul>
     </nav>
   </div>
 </header>
 
 <section class="hero">
-  <div class="container">
+  <div class="hero-content">
     <h1>SMK Muhammadiyah Bintan</h1>
     <p>Unggul dalam Prestasi, Berakhlak Mulia</p>
     <a href="#" class="btn">Profil Sekolah</a>
-    <a href="#" class="btn alt">PPDB</a>
   </div>
 </section>
 
 <section>
-  <div class="container">
-    <h2>Keunggulan Sekolah</h2>
-    <div class="grid">
-      <div class="card">
-        <img src="icon-guru.png" alt="">
-        <h3>Guru Profesional</h3>
-        <p>Tenaga pendidik berpengalaman dan bersertifikasi.</p>
-      </div>
-      <div class="card">
-        <img src="icon-lingkungan.png" alt="">
-        <h3>Lingkungan Nyaman</h3>
-        <p>Sekolah bersih, aman, dan kondusif.</p>
-      </div>
-      <div class="card">
-        <img src="icon-prestasi.png" alt="">
-        <h3>Prestasi</h3>
-        <p>Akademik dan non-akademik tingkat daerah.</p>
-      </div>
-    </div>
-  </div>
+  <h2>Keunggulan Sekolah</h2>
+  <p>Sekolah dengan lingkungan nyaman dan tenaga pendidik profesional.</p>
 </section>
 
 <footer>
-  <p>© 2026 SMK Muhammadiyah Bintan</p>
+  © 2026 SMK Muhammadiyah Bintan
 </footer>
 
 </body>
