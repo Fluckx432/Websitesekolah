@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cek SPP - SMK Muhammadiyah Bintan</title>
+  <style>
+    :root {
+      --hijau-tua: #2E7D32;
+      --hijau: #4CAF50;
+      --hijau-muda: #A5D6A7;
+      --hijau-pale: #E8F5E9;
+      --abu-gelap: #263238;
+      --abu: #546E7A;
+      --putih: #ffffff;
+      --merah: #c62828;
+      --merah-pale: #FFEBEE;
+      --kuning: #F9A825;
+      --kuning-pale: #FFFDE7;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: Arial, sans-serif; background: #f5f5f5; color: var(--abu-gelap); overflow-x: hidden; }
+
+    /* HEADER */
+    header {
+      background: var(--hijau-tua);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      width: 100%;
+    }
+    .header-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 65px;
+      padding: 0 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+    .logo img {
+      height: 48px; width: 48px;
+      object-fit: contain;
+      border-radius: 50%;
+      background: white;
+      padding: 2px;
+    }
+    .logo-text { color: white; font-weight: 700; font-size: 1rem; line-height: 1.3; }
+    .logo-text span { display: block; font-size: 0.75rem; font-weight: 400; opacity: 0.85; }
+    .menu-toggle {
+      display: none; background: none; border: none;
+      color: white; font-size: 1.6rem; cursor: pointer;
+    }
+    nav ul { list-style: none; display: flex; align-items: center; gap: 6px; }
+    nav a {
+      color: white; font-weight: 500; text-decoration: none;
+      font-size: 0.9rem; padding: 6px 12px; border-radius: 6px;
+      transition: background 0.2s;
+    }
+    nav a:hover { background: rgba(255,255,255,0.15); }
+    nav a.ppdb-link {
+      background: var(--hijau); border-radius: 20px;
+      padding: 6px 16px; font-weight: 600;
+    }
+    nav a.active-page { background: rgba(255,255,255,0.2); }
+
+    /* HERO */
+    .page-hero {
+      background: linear-gradient(135deg, var(--hijau-tua), var(--hijau));
+      padding: 50px 20px 60px;
+      text-align: center;
+      position: relative;
+    }
+    .page-hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 40px;
+      background: #f5f5f5;
+      clip-path: ellipse(55% 100% at 50% 100%);
+    }
+    .page-hero h1 { color: white; font-size: 28px; margin-bottom: 8px; }
+    .page-hero p { color: rgba(255,255,255,0.8); font-size: 14px; }
+
+    /* FORM CEK */
+    .cek-wrap {
+      max-width: 500px;
+      margin: 40px auto 0;
+      padding: 0 20px;
+    }
+    .cek-box {
+      background: white;
+      border-radius: 20px;
+      padding: 32px 28px;
+      box-shadow: 0 6px 25px rgba(0,0,0,0.08);
+    }
+    .cek-box h2 {
+      font-size: 18px;
+      color: var(--hijau-tua);
+      margin-bottom: 6px;
+      text-align: center;
+    }
+    .cek-box p {
+      font-size: 13px;
+      color: var(--abu);
+      text-align: center;
+      margin-bottom: 24px;
+    }
+    .input-group {
+      display: flex;
+      gap: 10px;
+    }
+    .input-group input {
+      flex: 1;
+      padding: 14px 16px;
+      border: 2px solid #E8F5E9;
+      border-radius: 12px;
+      font-size: 16px;
+      letter-spacing: 2px;
+      outline: none;
+      transition: border-color 0.2s;
+      color: var(--abu-gelap);
+    }
+    .input-group input:focus { border-color: var(--hijau); }
+    .input-group input::placeholder { letter-spacing: 0; color: #bbb; }
+    .input-group button {
+      padding: 14px 20px;
+      background: linear-gradient(135deg, var(--hijau-tua), var(--hijau));
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: opacity 0.2s;
+      white-space: nowrap;
+    }
+    .input-group button:hover { opacity: 0.9; }
+    .input-group button:disabled { opacity: 0.6; cursor: not-allowed; }
+
+    /* HASIL */
+    .hasil-wrap {
+      max-width: 700px;
+      margin: 30px auto 60px;
+      padding: 0 20px;
+    }
+
+    /* INFO SISWA */
+    .info-siswa {
+      background: white;
+      border-radius: 16px;
+      padding: 20px 24px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.07);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .info-siswa .avatar {
+      width: 56px; height: 56px;
+      border-radius: 50%;
+      background: var(--hijau-pale);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 28px;
+      flex-shrink: 0;
+    }
+    .info-siswa .detail h3 { font-size: 16px; color: var(--abu-gelap); margin-bottom: 4px; }
+    .info-siswa .detail p { font-size: 13px; color: var(--abu); }
+    .info-siswa .detail span {
+      display: inline-block;
+      background: var(--hijau-pale);
+      color: var(--hijau-tua);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 12px;
+      border-radius: 50px;
+      margin-top: 6px;
+    }
+
+    /* RINGKASAN */
+    .ringkasan {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .ring-card {
+      background: white;
+      border-radius: 14px;
+      padding: 18px 16px;
+      text-align: center;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.07);
+    }
+    .ring-card .angka {
+      font-size: 28px;
+      font-weight: 800;
+      margin-bottom: 4px;
+    }
+    .ring-card .label { font-size: 12px; color: var(--abu); }
+    .ring-card.lunas .angka { color: var(--hijau-tua); }
+    .ring-card.belum .angka { color: var(--merah); }
+    .ring-card.total .angka { color: var(--abu-gelap); }
+
+    /* TABEL RIWAYAT */
+    .riwayat-box {
+      background: white;
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.07);
+    }
+    .riwayat-box h3 {
+      font-size: 16px;
+      color: var(--hijau-tua);
+      font-weight: 700;
+      margin-bottom: 16px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--hijau-pale);
+    }
+    .riwayat-list { display: flex; flex-direction: column; gap: 10px; }
+    .riwayat-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 16px;
+      border-radius: 12px;
+      background: #fafafa;
+      border: 1.5px solid #f0f0f0;
+      transition: background 0.15s;
+    }
+    .riwayat-item:hover { background: #f5f5f5; }
+    .riwayat-item .bulan-info { display: flex; align-items: center; gap: 12px; }
+    .riwayat-item .bulan-icon {
+      width: 40px; height: 40px;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+    .riwayat-item.lunas .bulan-icon { background: var(--hijau-pale); }
+    .riwayat-item.belum .bulan-icon { background: var(--merah-pale); }
+    .riwayat-item .bulan-nama { font-size: 14px; font-weight: 600; color: var(--abu-gelap); }
+    .riwayat-item .tgl-bayar { font-size: 11px; color: var(--abu); margin-top: 2px; }
+    .riwayat-item .status-badge {
+      padding: 5px 14px;
+      border-radius: 50px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .riwayat-item.lunas .status-badge {
+      background: var(--hijau-pale);
+      color: var(--hijau-tua);
+    }
+    .riwayat-item.belum .status-badge {
+      background: var(--merah-pale);
+      color: var(--merah);
+    }
+
+    /* STATE: LOADING, ERROR, EMPTY */
+    .state-box {
+      text-align: center;
+      padding: 50px 20px;
+      color: var(--abu);
+    }
+    .state-box .icon { font-size: 48px; margin-bottom: 12px; }
+    .state-box p { font-size: 15px; }
+    .state-box small { font-size: 12px; display: block; margin-top: 6px; }
+    .spinner {
+      width: 40px; height: 40px;
+      border: 4px solid var(--hijau-pale);
+      border-top-color: var(--hijau);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin: 0 auto 16px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* FOOTER */
+    footer {
+      background: var(--hijau-tua);
+      color: white;
+      text-align: center;
+      padding: 30px 20px;
+      font-size: 14px;
+    }
+
+    .overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 998; }
+    .overlay.active { display: block; }
+    .nav-header { display: none; }
+
+    @media (max-width: 768px) {
+      .menu-toggle { display: block; }
+      nav {
+        position: fixed;
+        top: 0; right: 0; bottom: 0;
+        width: 75%; max-width: 280px;
+        background: #1B5E20;
+        z-index: 999;
+        transform: translateX(100%);
+        transition: transform 0.3s ease;
+        box-shadow: -6px 0 20px rgba(0,0,0,0.3);
+        display: flex; flex-direction: column; overflow: hidden;
+      }
+      nav.active { transform: translateX(0); }
+      .nav-header {
+        display: flex; align-items: center; gap: 12px;
+        padding: 24px 20px 20px;
+        border-bottom: 1px solid rgba(255,255,255,0.15);
+        background: rgba(0,0,0,0.15);
+      }
+      .nav-header img { width: 42px; height: 42px; border-radius: 50%; background: white; padding: 2px; object-fit: contain; }
+      .nav-header-text { color: white; font-size: 0.82rem; font-weight: 700; line-height: 1.3; }
+      .nav-header-text span { display: block; font-size: 0.7rem; font-weight: 400; opacity: 0.75; }
+      nav ul { flex-direction: column; align-items: flex-start; padding: 16px 14px; gap: 4px; flex: 1; }
+      nav ul li { width: 100%; }
+      nav ul li.divider { height: 1px; background: rgba(255,255,255,0.12); margin: 8px 6px; width: calc(100% - 12px); }
+      nav a { width: 100%; text-align: left; padding: 13px 16px; border-radius: 10px; font-size: 0.95rem; display: flex; align-items: center; gap: 12px; }
+      nav a:hover { background: rgba(255,255,255,0.12); }
+      nav a .nav-icon { font-size: 1.1rem; width: 24px; text-align: center; }
+      nav a.active-page { background: rgba(255,255,255,0.18); font-weight: 700; }
+      nav a.ppdb-link { background: rgba(76,175,80,0.3); font-weight: 600; border: 1px solid rgba(76,175,80,0.5); }
+      .nav-footer { padding: 16px 20px; border-top: 1px solid rgba(255,255,255,0.12); color: rgba(255,255,255,0.5); font-size: 11px; text-align: center; }
+      .ringkasan { grid-template-columns: repeat(3, 1fr); }
+      .ring-card .angka { font-size: 22px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <img src="logo.png" alt="Logo">
+      <div class="logo-text">
+        SMK Muhammadiyah Bintan
+        <span>Kepulauan Riau</span>
+      </div>
+    </a>
+    <button class="menu-toggle" onclick="toggleNav()">☰</button>
+    <nav id="mainNav">
+      <div class="nav-header">
+        <img src="logo.png" alt="Logo">
+        <div class="nav-header-text">SMK Muhammadiyah Bintan<span>Kepulauan Riau</span></div>
+      </div>
+      <ul>
+        <li><a href="index.html"><span class="nav-icon">🏠</span> Beranda</a></li>
+        <li><a href="profil.html"><span class="nav-icon">🏫</span> Profil</a></li>
+        <li><a href="berita.html"><span class="nav-icon">📰</span> Berita</a></li>
+        <li><a href="spp.html" class="active-page"><span class="nav-icon">💳</span> Cek SPP</a></li>
+        <li class="divider"></li>
+        <li><a href="ppdb.html" class="ppdb-link"><span class="nav-icon">🎓</span> PPDB</a></li>
+      </ul>
+      <div class="nav-footer">© 2026 SMK Muhammadiyah Bintan</div>
+    </nav>
+  </div>
+</header>
+<div class="overlay" id="overlay" onclick="toggleNav()"></div>
+
+<div class="page-hero">
+  <h1>💳 Cek Pembayaran SPP</h1>
+  <p>Masukkan NISN siswa untuk melihat riwayat pembayaran SPP</p>
+</div>
+
+<div class="cek-wrap">
+  <div class="cek-box">
+    <h2>🔍 Cari Riwayat SPP</h2>
+    <p>Masukkan NISN 10 digit milik siswa</p>
+    <div class="input-group">
+      <input type="number" id="inputNISN" placeholder="Masukkan NISN" maxlength="10"
+        onkeydown="if(event.key==='Enter') cekSPP()">
+      <button id="btnCek" onclick="cekSPP()">Cek →</button>
+    </div>
+  </div>
+</div>
+
+<div class="hasil-wrap" id="hasilWrap"></div>
+
+<footer>
+  <p>© 2026 SMK Muhammadiyah Bintan</p>
+</footer>
+
+<script>
+  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx4I5JN-n8T9Pxfr_clfZc5FaYZdHsGkyMk23ekLeo6hJA-HJg9VmgHBaGJqbhWT8vY/exec';
+
+  const NAMA_BULAN = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+
+  function cekSPP() {
+    const nisn = document.getElementById('inputNISN').value.trim();
+    const hasil = document.getElementById('hasilWrap');
+
+    if (!nisn || nisn.length < 5) {
+      hasil.innerHTML = `<div class="state-box"><div class="icon">⚠️</div><p>NISN tidak valid. Silakan periksa kembali.</p></div>`;
+      return;
+    }
+
+    const btn = document.getElementById('btnCek');
+    btn.disabled = true;
+    btn.textContent = '⏳';
+
+    hasil.innerHTML = `<div class="state-box"><div class="spinner"></div><p>Mencari data...</p></div>`;
+
+    fetch(`${SCRIPT_URL}?action=spp&nisn=${nisn}`)
+      .then(r => r.json())
+      .then(res => {
+        btn.disabled = false;
+        btn.textContent = 'Cek →';
+        if (res.status === 'success' && res.data) {
+          tampilHasil(res.data);
+        } else {
+          hasil.innerHTML = `
+            <div class="state-box">
+              <div class="icon">🔍</div>
+              <p>NISN <strong>${nisn}</strong> tidak ditemukan.</p>
+              <small>Pastikan NISN yang dimasukkan sudah benar, atau hubungi pihak sekolah.</small>
+            </div>`;
+        }
+      })
+      .catch(() => {
+        btn.disabled = false;
+        btn.textContent = 'Cek →';
+        hasil.innerHTML = `
+          <div class="state-box">
+            <div class="icon">❌</div>
+            <p>Gagal mengambil data. Periksa koneksi internet.</p>
+          </div>`;
+      });
+  }
+
+  function tampilHasil(data) {
+    const siswa = data.siswa;
+    const riwayat = data.riwayat;
+
+    const jumlahLunas = riwayat.filter(r => r.status === 'Lunas').length;
+    const jumlahBelum = riwayat.filter(r => r.status !== 'Lunas').length;
+    const total = riwayat.length;
+
+    let riwayatHtml = '';
+    riwayat.forEach(r => {
+      const isLunas = r.status === 'Lunas';
+      riwayatHtml += `
+        <div class="riwayat-item ${isLunas ? 'lunas' : 'belum'}">
+          <div class="bulan-info">
+            <div class="bulan-icon">${isLunas ? '✅' : '❌'}</div>
+            <div>
+              <div class="bulan-nama">${r.bulan} ${r.tahun}</div>
+              <div class="tgl-bayar">${isLunas ? '📅 Dibayar: ' + (r.tanggal_bayar || '-') : '⏳ Belum dibayar'}</div>
+            </div>
+          </div>
+          <div class="status-badge">${isLunas ? 'Lunas' : 'Belum Bayar'}</div>
+        </div>`;
+    });
+
+    document.getElementById('hasilWrap').innerHTML = `
+      <div class="info-siswa">
+        <div class="avatar">👤</div>
+        <div class="detail">
+          <h3>${siswa.nama}</h3>
+          <p>NISN: ${siswa.nisn}</p>
+          <span>${siswa.kelas}</span>
+        </div>
+      </div>
+
+      <div class="ringkasan">
+        <div class="ring-card total">
+          <div class="angka">${total}</div>
+          <div class="label">Total Bulan</div>
+        </div>
+        <div class="ring-card lunas">
+          <div class="angka">${jumlahLunas}</div>
+          <div class="label">Lunas</div>
+        </div>
+        <div class="ring-card belum">
+          <div class="angka">${jumlahBelum}</div>
+          <div class="label">Belum Bayar</div>
+        </div>
+      </div>
+
+      <div class="riwayat-box">
+        <h3>📋 Riwayat Pembayaran ${new Date().getFullYear()}</h3>
+        <div class="riwayat-list">${riwayatHtml}</div>
+      </div>`;
+  }
+
+  function toggleNav() {
+    document.getElementById('mainNav').classList.toggle('active');
+    document.getElementById('overlay').classList.toggle('active');
+  }
+</script>
+</body>
+</html>
