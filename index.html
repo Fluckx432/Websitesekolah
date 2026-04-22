@@ -5,356 +5,311 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SMK Muhammadiyah Bintan</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --hijau-tua: #2E7D32;
-      --hijau: #4CAF50;
+      --hijau-tua: #1B5E20;
+      --hijau: #2E7D32;
+      --hijau-cerah: #43A047;
       --hijau-muda: #A5D6A7;
-      --abu: #424242;
+      --hijau-pale: #E8F5E9;
       --putih: #ffffff;
+      --gelap: #0d1f0e;
+      --abu: #546E7A;
+      --abu-muda: #90A4AE;
+      --bg: #f8faf8;
     }
-
     * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); color: #1a2e1b; overflow-x: hidden; }
 
-    body {
-      font-family: 'Poppins', sans-serif;
-      color: var(--abu);
-      background: var(--putih);
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
-
-    img { max-width: 100%; display: block; }
-    h1, h2, h3 { font-family: 'Roboto', sans-serif; }
-
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 20px;
-    }
-
-    /* ====== HEADER ====== */
+    /* ─── HEADER ─── */
     header {
       background: var(--hijau-tua);
-      position: sticky;
-      top: 0;
-      z-index: 1000;
+      position: sticky; top: 0; z-index: 1000;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .header-inner {
+      display: flex; justify-content: space-between; align-items: center;
+      height: 66px; padding: 0 32px; max-width: 1200px; margin: 0 auto;
+    }
+    .logo { display: flex; align-items: center; gap: 11px; text-decoration: none; }
+    .logo img { height: 44px; width: 44px; border-radius: 50%; background: white; padding: 2px; object-fit: contain; }
+    .logo-text { color: white; font-weight: 800; font-size: 0.88rem; line-height: 1.35; }
+    .logo-text span { display: block; font-size: 0.68rem; font-weight: 400; opacity: 0.75; }
+    .menu-toggle { display: none; background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; }
+    nav ul { list-style: none; display: flex; align-items: center; gap: 2px; }
+    nav a { color: rgba(255,255,255,0.88); font-weight: 500; text-decoration: none; font-size: 0.875rem; padding: 7px 14px; border-radius: 8px; transition: all 0.2s; }
+    nav a:hover, nav a.active-page { background: rgba(255,255,255,0.14); color: white; }
+    nav a.ppdb-link { background: var(--hijau-cerah); color: white; border-radius: 50px; padding: 7px 20px; font-weight: 700; margin-left: 6px; }
+    nav a.ppdb-link:hover { background: #388E3C; }
+
+    /* ─── HERO ─── */
+    .hero {
+      position: relative;
+      min-height: 88vh;
+      display: flex; align-items: center; justify-content: center;
+      background: linear-gradient(160deg, var(--hijau-tua) 0%, #2E7D32 45%, #388E3C 100%);
+      overflow: hidden;
+      padding: 80px 32px 100px;
+      text-align: center;
+    }
+    .hero-bg-pattern {
+      position: absolute; inset: 0; opacity: 0.06;
+      background-image: radial-gradient(circle, #fff 1px, transparent 1px);
+      background-size: 30px 30px;
+    }
+    .hero-glow {
+      position: absolute; width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(165,214,167,0.2) 0%, transparent 70%);
+      top: 50%; left: 50%; transform: translate(-50%, -50%);
+    }
+    .hero::after {
+      content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+      height: 70px; background: var(--bg);
+      clip-path: ellipse(65% 100% at 50% 100%);
+    }
+    .hero-inner { position: relative; z-index: 2; max-width: 720px; }
+    .hero-chip {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2);
+      color: rgba(255,255,255,0.9); font-size: 11px; font-weight: 700;
+      letter-spacing: 1.5px; padding: 6px 18px; border-radius: 50px;
+      margin-bottom: 28px; backdrop-filter: blur(8px);
+    }
+    .hero h1 {
+      color: white; font-size: clamp(2.2rem, 5vw, 3.6rem);
+      font-weight: 800; line-height: 1.12; margin-bottom: 20px;
+      letter-spacing: -0.5px;
+    }
+    .hero h1 em { color: #A5D6A7; font-style: normal; }
+    .hero-sub {
+      color: rgba(255,255,255,0.75); font-size: clamp(0.95rem, 2vw, 1.1rem);
+      line-height: 1.75; margin-bottom: 40px; max-width: 520px; margin-left: auto; margin-right: auto;
+    }
+    .hero-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: white; color: var(--hijau-tua); padding: 13px 28px;
+      border-radius: 50px; font-weight: 700; font-size: 14px;
+      text-decoration: none; transition: all 0.25s;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(0,0,0,0.2); }
+    .btn-outline {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(255,255,255,0.1); color: white; padding: 13px 28px;
+      border-radius: 50px; font-weight: 600; font-size: 14px;
+      text-decoration: none; transition: all 0.25s;
+      border: 1.5px solid rgba(255,255,255,0.3); backdrop-filter: blur(8px);
+    }
+    .btn-outline:hover { background: rgba(255,255,255,0.18); transform: translateY(-2px); }
+
+    /* ─── STATS ─── */
+    .stats-band {
+      max-width: 860px; margin: 0 auto; padding: 0 24px;
+      position: relative; z-index: 5; margin-top: -28px;
+    }
+    .stats-card {
+      background: white; border-radius: 20px;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.1);
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      overflow: hidden; border: 1px solid #e8f5e9;
+    }
+    .stat-box {
+      padding: 28px 20px; text-align: center;
+      border-right: 1px solid #f0f0f0;
+    }
+    .stat-box:last-child { border-right: none; }
+    .stat-box .n { font-size: 2.1rem; font-weight: 800; color: var(--hijau); line-height: 1; margin-bottom: 6px; }
+    .stat-box .l { font-size: 12px; font-weight: 600; color: var(--abu); text-transform: uppercase; letter-spacing: 0.5px; }
+
+    /* ─── SECTION ─── */
+    .sec { padding: 80px 32px; max-width: 1100px; margin: 0 auto; }
+    .sec-hd { text-align: center; margin-bottom: 52px; }
+    .sec-tag {
+      display: inline-block; background: var(--hijau-pale); color: var(--hijau);
+      font-size: 10px; font-weight: 800; letter-spacing: 2.5px;
+      padding: 5px 16px; border-radius: 50px; margin-bottom: 14px; text-transform: uppercase;
+    }
+    .sec-title { font-size: clamp(1.6rem, 3vw, 2.1rem); font-weight: 800; color: #1a2e1b; line-height: 1.25; }
+
+    /* ─── SAMBUTAN ─── */
+    .sambutan-card {
+      background: white; border-radius: 24px; overflow: hidden;
+      box-shadow: 0 4px 30px rgba(0,0,0,0.06); display: flex;
+      border: 1px solid var(--hijau-pale);
+    }
+    .sambutan-accent { width: 6px; background: linear-gradient(to bottom, var(--hijau-tua), var(--hijau-cerah)); flex-shrink: 0; }
+    .sambutan-body { padding: 40px 40px 40px 36px; flex: 1; display: flex; gap: 32px; align-items: flex-start; }
+    .sambutan-person { text-align: center; flex-shrink: 0; }
+    .sambutan-ava {
+      width: 100px; height: 100px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--hijau-tua), var(--hijau-cerah));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 44px; margin: 0 auto 12px;
+      box-shadow: 0 6px 20px rgba(46,125,50,0.25);
+    }
+    .sambutan-nm { font-weight: 800; color: var(--hijau); font-size: 13px; }
+    .sambutan-jb { font-size: 11px; color: var(--abu-muda); margin-top: 3px; }
+    .sambutan-txt .salam { font-size: 12px; color: var(--abu-muda); margin-bottom: 12px; font-style: italic; }
+    .sambutan-txt p { font-size: 15px; color: #374151; line-height: 1.82; margin-bottom: 14px; }
+    .quote-strip {
+      background: var(--hijau-pale); border-left: 3px solid var(--hijau-cerah);
+      padding: 14px 18px; border-radius: 0 10px 10px 0;
+      font-style: italic; font-weight: 600; color: var(--hijau); font-size: 14px; line-height: 1.6;
+    }
+
+    /* ─── KEUNGGULAN ─── */
+    .keunggulan-bg { background: white; padding: 80px 32px; }
+    .unggulan-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+      max-width: 1100px; margin: 0 auto;
+    }
+    /* jika ganjil, rata tengah */
+    .unggulan-grid.ganjil { justify-items: center; }
+    .unggulan-grid.ganjil .u-card:last-child:nth-child(odd) { grid-column: 2; }
+    .u-card {
+      background: var(--bg); border-radius: 20px; padding: 32px 28px;
+      text-align: center; transition: all 0.3s; border: 1.5px solid transparent;
       width: 100%;
     }
+    .u-card:hover { background: white; border-color: var(--hijau-muda); transform: translateY(-5px); box-shadow: 0 12px 36px rgba(46,125,50,0.1); }
+    .u-icon { width: 68px; height: 68px; border-radius: 18px; background: var(--hijau-pale); display: flex; align-items: center; justify-content: center; margin: 0 auto 18px; }
+    .u-icon img { height: 36px; object-fit: contain; }
+    .u-card h3 { font-size: 16px; font-weight: 800; color: #1a2e1b; margin-bottom: 8px; }
+    .u-card p { font-size: 13px; color: var(--abu); line-height: 1.65; }
 
-    .header-inner {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      min-height: 70px;
-      padding: 10px 20px;
-      max-width: 1200px;
-      margin: 0 auto;
+    /* ─── BERITA ─── */
+    .berita-section { background: var(--bg); padding: 80px 32px; }
+    .berita-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px;
+      max-width: 1100px; margin: 0 auto 36px;
     }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      text-decoration: none;
+    /* rata tengah kalau ganjil */
+    .berita-grid .b-card:last-child:nth-child(3n+1) { grid-column: 2; }
+    .b-card {
+      background: white; border-radius: 18px; overflow: hidden;
+      border: 1px solid #eef2ee; transition: all 0.3s; cursor: pointer;
     }
-
-    .logo img {
-      height: 48px;
-      width: 48px;
-      object-fit: contain;
-      border-radius: 50%;
-      background: white;
-      padding: 2px;
-      flex-shrink: 0;
+    .b-card:hover { transform: translateY(-5px); box-shadow: 0 12px 36px rgba(0,0,0,0.09); }
+    .b-foto { height: 175px; background: var(--hijau-pale); display: flex; align-items: center; justify-content: center; font-size: 36px; overflow: hidden; }
+    .b-foto img { width: 100%; height: 175px; object-fit: cover; }
+    .b-body { padding: 18px 20px; }
+    .b-tag { display: inline-block; background: var(--hijau-pale); color: var(--hijau); font-size: 10px; font-weight: 800; padding: 3px 11px; border-radius: 50px; margin-bottom: 9px; letter-spacing: 0.5px; }
+    .b-card h3 { font-size: 14px; font-weight: 700; line-height: 1.45; color: #1a2e1b; margin-bottom: 6px; }
+    .b-meta { font-size: 11px; color: var(--abu-muda); margin-top: 10px; padding-top: 10px; border-top: 1px solid #f5f5f5; display: flex; justify-content: space-between; }
+    .btn-more {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--hijau); color: white; padding: 12px 28px;
+      border-radius: 50px; font-weight: 700; font-size: 14px;
+      text-decoration: none; transition: all 0.25s;
     }
+    .btn-more:hover { background: var(--hijau-tua); transform: translateY(-2px); }
+    .berita-center { text-align: center; }
+    .berita-loading { text-align: center; padding: 50px; color: var(--abu); }
+    .spinner { width: 36px; height: 36px; border: 3px solid var(--hijau-pale); border-top-color: var(--hijau-cerah); border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 14px; }
+    @keyframes spin { to { transform: rotate(360deg); } }
 
-    .logo-text {
-      color: white;
-      font-weight: 700;
-      font-size: 0.85rem;
-      line-height: 1.3;
+    /* ─── DOKUMENTASI ─── */
+    .dok-section { background: var(--hijau-tua); padding: 80px 32px; }
+    .dok-section .sec-tag { background: rgba(255,255,255,0.15); color: white; }
+    .dok-section .sec-title { color: white; }
+    .dok-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;
+      max-width: 1000px; margin: 0 auto;
     }
+    .dok-item { border-radius: 14px; overflow: hidden; aspect-ratio: 4/3; transition: transform 0.3s; box-shadow: 0 4px 16px rgba(0,0,0,0.25); }
+    .dok-item:hover { transform: scale(1.03); }
+    .dok-item img { width: 100%; height: 100%; object-fit: cover; }
 
-    .logo-text span {
-      display: block;
-      font-size: 0.7rem;
-      font-weight: 400;
-      opacity: 0.85;
+    /* ─── LAYANAN ─── */
+    .layanan-section { background: white; padding: 80px 32px; }
+    .layanan-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px;
+      max-width: 1000px; margin: 0 auto;
     }
-
-    .menu-toggle {
-      display: none;
-      background: none;
-      border: none;
-      color: white;
-      font-size: 1.6rem;
-      cursor: pointer;
-      padding: 5px;
-      line-height: 1;
+    .l-card {
+      background: var(--bg); border-radius: 18px; padding: 28px 20px;
+      text-align: center; text-decoration: none; transition: all 0.3s;
+      border: 1.5px solid #eef2ee;
     }
+    .l-card:hover { background: var(--hijau-pale); border-color: var(--hijau-muda); transform: translateY(-4px); box-shadow: 0 10px 30px rgba(46,125,50,0.1); }
+    .l-icon { font-size: 32px; margin-bottom: 12px; }
+    .l-card h3 { font-size: 14px; font-weight: 800; color: var(--hijau-tua); margin-bottom: 5px; }
+    .l-card p { font-size: 12px; color: var(--abu); line-height: 1.5; }
 
-    nav ul {
-      list-style: none;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
+    /* ─── FOOTER ─── */
+    footer { background: #071a08; color: white; padding: 56px 32px 28px; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 48px; max-width: 1100px; margin: 0 auto 40px; }
+    .f-brand { }
+    .f-logo { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+    .f-logo img { width: 44px; height: 44px; border-radius: 50%; background: white; padding: 2px; object-fit: contain; }
+    .f-logo span { font-weight: 800; font-size: 14px; }
+    .f-brand p { font-size: 13px; color: rgba(255,255,255,0.5); line-height: 1.75; max-width: 300px; }
+    .f-col h4 { font-size: 10px; font-weight: 800; letter-spacing: 2px; color: var(--hijau-muda); margin-bottom: 18px; text-transform: uppercase; }
+    .f-col ul { list-style: none; }
+    .f-col ul li { margin-bottom: 10px; }
+    .f-col ul li a { color: rgba(255,255,255,0.6); text-decoration: none; font-size: 13px; transition: color 0.2s; }
+    .f-col ul li a:hover { color: white; }
+    .f-col ul li span { color: rgba(255,255,255,0.55); font-size: 13px; line-height: 1.6; display: block; }
+    .f-bottom { max-width: 1100px; margin: 0 auto; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 24px; text-align: center; font-size: 12px; color: rgba(255,255,255,0.3); }
 
-    nav a {
-      color: white;
-      font-weight: 500;
-      text-decoration: none;
-      font-size: 0.9rem;
-      padding: 6px 12px;
-      border-radius: 6px;
-      transition: background 0.2s;
-    }
-
-    nav a:hover { background: rgba(255,255,255,0.15); }
-
-    nav a.ppdb-link {
-      background: var(--hijau);
-      border-radius: 20px;
-      padding: 6px 16px;
-      font-weight: 600;
-    }
-
-    nav a.ppdb-link:hover { background: #43A047; }
-
-    /* ====== HERO ====== */
-    .hero {
-      background:
-        linear-gradient(rgba(46,125,50,.65), rgba(46,125,50,.45)),
-        url('hero.png') center/cover no-repeat;
-      color: white;
-      text-align: center;
-      padding: 130px 20px 110px;
-    }
-
-    .hero h1 { font-size: 3rem; margin-bottom: 15px; }
-    .hero p { font-size: 1.2rem; margin-bottom: 30px; }
-
-    .btn {
-      display: inline-block;
-      background: var(--hijau);
-      color: white;
-      padding: 14px 34px;
-      border-radius: 50px;
-      font-weight: 600;
-      margin: 8px;
-      text-decoration: none;
-      transition: opacity 0.2s, transform 0.2s;
-    }
-
-    .btn:hover { opacity: 0.9; transform: translateY(-2px); }
-    .btn.alt { background: var(--hijau-muda); color: var(--hijau-tua); }
-
-    /* ====== SECTION ====== */
-    section { padding: 80px 0; }
-
-    h2 {
-      text-align: center;
-      font-size: 2.2rem;
-      color: var(--hijau-tua);
-      margin-bottom: 50px;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 30px;
-    }
-
-    .card {
-      background: white;
-      padding: 35px 30px;
-      border-radius: 16px;
-      text-align: center;
-      box-shadow: 0 10px 25px rgba(0,0,0,.08);
-    }
-
-    .card img { height: 80px; margin: 0 auto 20px; }
-
-    /* ====== FOOTER ====== */
-    footer {
-      background: var(--hijau-tua);
-      color: white;
-      text-align: center;
-      padding: 40px 20px;
-    }
-
-    /* ====== MOBILE ====== */
-    .overlay {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.5);
-      z-index: 998;
-    }
+    /* ─── MOBILE NAV ─── */
+    .overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.55); z-index: 998; }
     .overlay.active { display: block; }
+    .nav-header { display: none; }
 
-    .nav-header {
-      display: none;
+    @media (max-width: 900px) {
+      .stats-card { grid-template-columns: repeat(2, 1fr); }
+      .unggulan-grid, .berita-grid { grid-template-columns: repeat(2, 1fr); }
+      .unggulan-grid.ganjil .u-card:last-child:nth-child(odd) { grid-column: auto; }
+      .berita-grid .b-card:last-child:nth-child(3n+1) { grid-column: auto; }
+      .layanan-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+      .dok-grid { grid-template-columns: repeat(2, 1fr); }
     }
 
-    @media (max-width: 768px) {
+    @media (max-width: 640px) {
       .menu-toggle { display: block; }
-
-      nav {
-        position: fixed;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        width: 75%;
-        max-width: 280px;
-        background: #1B5E20;
-        z-index: 999;
-        transform: translateX(100%);
-        transition: transform 0.3s ease;
-        box-shadow: -6px 0 20px rgba(0,0,0,0.3);
-        display: flex;
-        flex-direction: column;
-        overflow: hidden;
-      }
-
+      nav { position: fixed; top: 0; right: 0; bottom: 0; width: 78%; max-width: 280px; background: #1B5E20; z-index: 999; transform: translateX(100%); transition: transform 0.3s ease; box-shadow: -6px 0 24px rgba(0,0,0,0.3); display: flex; flex-direction: column; overflow: hidden; }
       nav.active { transform: translateX(0); }
-
-      .nav-header {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        padding: 24px 20px 20px;
-        border-bottom: 1px solid rgba(255,255,255,0.15);
-        background: rgba(0,0,0,0.15);
-      }
-
-      .nav-header img {
-        width: 42px; height: 42px;
-        border-radius: 50%;
-        background: white;
-        padding: 2px;
-        object-fit: contain;
-      }
-
-      .nav-header-text {
-        color: white;
-        font-size: 0.82rem;
-        font-weight: 700;
-        line-height: 1.3;
-      }
-
-      .nav-header-text span {
-        display: block;
-        font-size: 0.7rem;
-        font-weight: 400;
-        opacity: 0.75;
-      }
-
-      nav ul {
-        flex-direction: column;
-        align-items: flex-start;
-        padding: 16px 14px;
-        gap: 4px;
-        flex: 1;
-      }
-
-      nav ul li {
-        width: 100%;
-      }
-
-      nav ul li.divider {
-        height: 1px;
-        background: rgba(255,255,255,0.12);
-        margin: 8px 6px;
-        width: calc(100% - 12px);
-      }
-
-      nav a {
-        width: 100%;
-        text-align: left;
-        padding: 13px 16px;
-        border-radius: 10px;
-        font-size: 0.95rem;
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        transition: background 0.2s;
-      }
-
-      nav a:hover { background: rgba(255,255,255,0.12); }
-
-      nav a .nav-icon {
-        font-size: 1.1rem;
-        width: 24px;
-        text-align: center;
-      }
-
-      nav a.active-page {
-        background: rgba(255,255,255,0.18);
-        font-weight: 700;
-      }
-
-      nav a.ppdb-link {
-        width: 100%;
-        text-align: left;
-        margin-top: 0;
-        padding: 13px 16px;
-        border-radius: 10px;
-        background: rgba(76,175,80,0.3);
-        font-weight: 600;
-        border: 1px solid rgba(76,175,80,0.5);
-      }
-
-      nav a.ppdb-link:hover { background: rgba(76,175,80,0.5); }
-
-      .nav-footer {
-        padding: 16px 20px;
-        border-top: 1px solid rgba(255,255,255,0.12);
-        color: rgba(255,255,255,0.5);
-        font-size: 11px;
-        text-align: center;
-      }
-
-      .hero h1 { font-size: 2rem; }
-      .hero p { font-size: 1rem; }
-
-      .btn {
-        display: block;
-        max-width: 280px;
-        margin: 10px auto;
-        text-align: center;
-      }
-
-      h2 { font-size: 1.8rem; }
+      .nav-header { display: flex; align-items: center; gap: 12px; padding: 24px 20px 20px; border-bottom: 1px solid rgba(255,255,255,0.12); background: rgba(0,0,0,0.12); }
+      .nav-header img { width: 40px; height: 40px; border-radius: 50%; background: white; padding: 2px; object-fit: contain; }
+      .nav-header-text { color: white; font-size: 0.8rem; font-weight: 800; line-height: 1.3; }
+      .nav-header-text span { display: block; font-size: 0.68rem; font-weight: 400; opacity: 0.7; }
+      nav ul { flex-direction: column; align-items: flex-start; padding: 16px 14px; gap: 2px; flex: 1; }
+      nav ul li { width: 100%; }
+      nav ul li.divider { height: 1px; background: rgba(255,255,255,0.1); margin: 8px 0; }
+      nav a { width: 100%; padding: 13px 16px; border-radius: 10px; font-size: 0.92rem; display: flex; align-items: center; gap: 12px; }
+      nav a .nav-icon { width: 22px; text-align: center; }
+      nav a.active-page { background: rgba(255,255,255,0.16); }
+      nav a.ppdb-link { background: rgba(76,175,80,0.28); border: 1px solid rgba(76,175,80,0.4); }
+      .nav-footer { padding: 16px 20px; border-top: 1px solid rgba(255,255,255,0.1); color: rgba(255,255,255,0.4); font-size: 11px; text-align: center; }
+      .sambutan-body { flex-direction: column; align-items: center; text-align: center; padding: 28px 24px; }
+      .sambutan-accent { width: 100%; height: 5px; }
+      .sambutan-card { flex-direction: column; }
+      .quote-strip { text-align: left; }
+      .unggulan-grid, .berita-grid { grid-template-columns: 1fr; }
+      .layanan-grid { grid-template-columns: repeat(2, 1fr); }
+      .stats-card { grid-template-columns: repeat(2, 1fr); }
     }
   </style>
 </head>
-
 <body>
 
 <!-- HEADER -->
 <header>
   <div class="header-inner">
     <a href="index.html" class="logo">
-      <img src="logo.png" alt="Logo SMK Muhammadiyah Bintan">
-      <div class="logo-text">
-        SMK Muhammadiyah Bintan
-        <span>Kepulauan Riau</span>
-      </div>
+      <img src="logo.png" alt="Logo">
+      <div class="logo-text">SMK Muhammadiyah Bintan<span>Kepulauan Riau</span></div>
     </a>
-
     <button class="menu-toggle" onclick="toggleNav()">☰</button>
-
     <nav id="mainNav">
       <div class="nav-header">
         <img src="logo.png" alt="Logo">
-        <div class="nav-header-text">
-          SMK Muhammadiyah Bintan
-          <span>Kepulauan Riau</span>
-        </div>
+        <div class="nav-header-text">SMK Muhammadiyah Bintan<span>Kepulauan Riau</span></div>
       </div>
       <ul>
         <li><a href="index.html" class="active-page"><span class="nav-icon">🏠</span> Beranda</a></li>
@@ -368,100 +323,192 @@
     </nav>
   </div>
 </header>
-
 <div class="overlay" id="overlay" onclick="toggleNav()"></div>
 
 <!-- HERO -->
 <section class="hero">
-  <div class="container">
-    <h1>SMK Muhammadiyah Bintan</h1>
-    <p>Unggul dalam Prestasi, Berakhlak Mulia</p>
-    <a href="profil.html" class="btn">Profil Sekolah</a>
-    <a href="ppdb.html" class="btn alt">PPDB</a>
+  <div class="hero-bg-pattern"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-inner">
+    <div class="hero-chip">🕌 MUHAMMADIYAH BINTAN · KEPULAUAN RIAU</div>
+    <h1>SMK Muhammadiyah<br><em>Bintan</em></h1>
+    <p class="hero-sub">Unggul dalam Prestasi, Berakhlak Mulia.<br>Mencetak generasi terampil dan berdaya saing di dunia usaha & industri.</p>
+    <div class="hero-actions">
+      <a href="profil.html" class="btn-primary">🏫 Profil Sekolah</a>
+      <a href="spp.html" class="btn-outline">💳 Cek SPP</a>
+      <a href="ppdb.html" class="btn-outline">🎓 Daftar PPDB</a>
+    </div>
   </div>
 </section>
+
+<!-- STATS -->
+<div class="stats-band">
+  <div class="stats-card">
+    <div class="stat-box"><div class="n">4</div><div class="l">Jurusan</div></div>
+    <div class="stat-box"><div class="n">30+</div><div class="l">Guru & Staff</div></div>
+    <div class="stat-box"><div class="n">300+</div><div class="l">Siswa Aktif</div></div>
+    <div class="stat-box"><div class="n">10+</div><div class="l">Tahun Berdiri</div></div>
+  </div>
+</div>
 
 <!-- SAMBUTAN -->
-<section style="padding: 60px 0; background: white;">
-  <div class="container">
-    <h2>Sambutan Kepala Sekolah</h2>
-    <div style="max-width:750px; margin:0 auto; background: #f9f9f9; border-radius:20px; padding:30px; box-shadow: 0 10px 30px rgba(0,0,0,0.07);">
-      <div style="display:flex; flex-wrap:wrap; gap:24px; align-items:flex-start;">
-        <div style="text-align:center; min-width:100px; flex:0 0 auto; margin:0 auto;">
-          <div style="width:100px; height:100px; border-radius:50%; background:linear-gradient(135deg,#2E7D32,#4CAF50); display:flex; align-items:center; justify-content:center; font-size:48px; margin:0 auto 10px;">👩‍💼</div>
-          <p style="font-weight:700; color:#2E7D32; font-size:14px;">Elvirahmi, S.E</p>
-          <p style="font-size:12px; color:#888;">Kepala Sekolah</p>
-        </div>
-        <div style="flex:1; min-width:200px;">
-          <p style="font-size:13px; color:#888; margin-bottom:10px;">Assalamualaikum Wr. Wb.</p>
-          <p style="font-size:15px; color:#424242; line-height:1.8; margin-bottom:12px;">Puji syukur kehadirat Allah SWT atas segala nikmat dan karunia-Nya. Selamat datang di website resmi SMK Muhammadiyah Bintan.</p>
-          <p style="font-size:15px; color:#424242; line-height:1.8; margin-bottom:12px;">Kami berkomitmen untuk mencetak generasi yang bertakwa, terampil, dan berdaya saing di dunia usaha dan industri. Semoga website ini dapat menjadi sarana informasi yang bermanfaat bagi seluruh civitas akademika dan masyarakat.</p>
-          <p style="font-size:13px; color:#888;">Wassalamualaikum Wr. Wb.</p>
-        </div>
+<div class="sec">
+  <div class="sec-hd">
+    <div class="sec-tag">👤 Sambutan</div>
+    <h2 class="sec-title">Sambutan Kepala Sekolah</h2>
+  </div>
+  <div class="sambutan-card">
+    <div class="sambutan-accent"></div>
+    <div class="sambutan-body">
+      <div class="sambutan-person">
+        <div class="sambutan-ava">👩‍💼</div>
+        <div class="sambutan-nm">Elvirahmi, S.E</div>
+        <div class="sambutan-jb">Kepala Sekolah</div>
+      </div>
+      <div class="sambutan-txt">
+        <div class="salam">Assalamualaikum Wr. Wb.</div>
+        <p>Puji syukur kehadirat Allah SWT atas segala nikmat dan karunia-Nya. Selamat datang di website resmi SMK Muhammadiyah Bintan.</p>
+        <p>Kami berkomitmen untuk mencetak generasi yang bertakwa, terampil, dan berdaya saing di dunia usaha dan industri. Semoga website ini dapat menjadi sarana informasi yang bermanfaat bagi seluruh civitas akademika dan masyarakat.</p>
+        <div class="quote-strip">"Mewujudkan insan bertakwa, terampil, mandiri, berdaya saing di dunia usaha/industri"</div>
+        <p style="margin-top:14px;font-size:12px;color:var(--abu-muda);">Wassalamualaikum Wr. Wb.</p>
       </div>
     </div>
   </div>
-</section>
+</div>
 
 <!-- KEUNGGULAN -->
-<section>
-  <div class="container">
-    <h2>Keunggulan Sekolah</h2>
-    <div class="grid">
-      <div class="card">
-        <img src="icon-guru.png" alt="">
+<div class="keunggulan-bg">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div class="sec-hd">
+      <div class="sec-tag">⭐ Keunggulan</div>
+      <h2 class="sec-title">Mengapa SMK Muhammadiyah Bintan?</h2>
+    </div>
+    <div class="unggulan-grid ganjil">
+      <div class="u-card">
+        <div class="u-icon"><img src="icon-guru.png" alt="Guru"></div>
         <h3>Guru Profesional</h3>
-        <p>Tenaga pendidik berpengalaman dan bersertifikasi.</p>
+        <p>Tenaga pendidik berpengalaman dan bersertifikasi di bidangnya masing-masing</p>
       </div>
-      <div class="card">
-        <img src="icon-lingkungan.png" alt="">
-        <h3>Lingkungan Nyaman</h3>
-        <p>Sekolah bersih, aman, dan kondusif.</p>
+      <div class="u-card">
+        <div class="u-icon"><img src="icon-lingkungan.png" alt="Lingkungan"></div>
+        <h3>Lingkungan Islami</h3>
+        <p>Suasana belajar yang kondusif, bersih, aman, dan bernuansa islami</p>
       </div>
-      <div class="card">
-        <img src="icon-prestasi.png" alt="">
-        <h3>Prestasi</h3>
-        <p>Akademik dan non-akademik tingkat daerah.</p>
+      <div class="u-card">
+        <div class="u-icon"><img src="icon-prestasi.png" alt="Prestasi"></div>
+        <h3>Berprestasi</h3>
+        <p>Meraih berbagai prestasi akademik dan non-akademik tingkat daerah</p>
       </div>
     </div>
   </div>
-</section>
+</div>
+
+<!-- BERITA TERBARU -->
+<div class="berita-section">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div class="sec-hd">
+      <div class="sec-tag">📰 Berita</div>
+      <h2 class="sec-title">Berita & Informasi Terbaru</h2>
+    </div>
+    <div id="beritaHome">
+      <div class="berita-loading"><div class="spinner"></div>Memuat berita...</div>
+    </div>
+    <div class="berita-center" style="margin-top:36px;">
+      <a href="berita.html" class="btn-more">Lihat Semua Berita →</a>
+    </div>
+  </div>
+</div>
 
 <!-- DOKUMENTASI -->
-<section style="padding: 80px 0; background: #f5f5f5;">
-  <div class="container">
-    <h2>Dokumentasi Sekolah</h2>
-    <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap: 14px;">
-      <div style="border-radius:14px; overflow:hidden; box-shadow: 0 6px 20px rgba(0,0,0,0.1); aspect-ratio:4/3;">
-        <img src="https://i.ibb.co.com/yBSWyKxc/smkmuhammadiyahbintan-20260215-0001.webp" style="width:100%; height:100%; object-fit:cover;">
-      </div>
-      <div style="border-radius:14px; overflow:hidden; box-shadow: 0 6px 20px rgba(0,0,0,0.1); aspect-ratio:4/3;">
-        <img src="https://i.ibb.co.com/YFQbpGX8/smkmuhammadiyahbintan-20260215-0002.webp" style="width:100%; height:100%; object-fit:cover;">
-      </div>
-      <div style="border-radius:14px; overflow:hidden; box-shadow: 0 6px 20px rgba(0,0,0,0.1); aspect-ratio:4/3;">
-        <img src="https://i.ibb.co.com/PvPZSC36/smkmuhammadiyahbintan-20260215-0003.webp" style="width:100%; height:100%; object-fit:cover;">
-      </div>
-      <div style="border-radius:14px; overflow:hidden; box-shadow: 0 6px 20px rgba(0,0,0,0.1); aspect-ratio:4/3;">
-        <img src="https://i.ibb.co.com/7J3qk0SG/smkmuhammadiyahbintan-20260215-0004.webp" style="width:100%; height:100%; object-fit:cover;">
-      </div>
-      <div style="border-radius:14px; overflow:hidden; box-shadow: 0 6px 20px rgba(0,0,0,0.1); aspect-ratio:4/3;">
-        <img src="https://i.ibb.co.com/Qz0SgK5/smkmuhammadiyahbintan-20260215-0005.webp" style="width:100%; height:100%; object-fit:cover;">
-      </div>
-      <div style="border-radius:14px; overflow:hidden; box-shadow: 0 6px 20px rgba(0,0,0,0.1); aspect-ratio:4/3;">
-        <img src="https://i.ibb.co.com/bjNTkJSb/smkmuhammadiyahbintan-20260215-0006.webp" style="width:100%; height:100%; object-fit:cover;">
-      </div>
+<div class="dok-section">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div class="sec-hd">
+      <div class="sec-tag">📸 Dokumentasi</div>
+      <h2 class="sec-title">Galeri Kegiatan Sekolah</h2>
+    </div>
+    <div class="dok-grid">
+      <div class="dok-item"><img src="https://i.ibb.co.com/yBSWyKxc/smkmuhammadiyahbintan-20260215-0001.webp" alt="Foto 1"></div>
+      <div class="dok-item"><img src="https://i.ibb.co.com/YFQbpGX8/smkmuhammadiyahbintan-20260215-0002.webp" alt="Foto 2"></div>
+      <div class="dok-item"><img src="https://i.ibb.co.com/PvPZSC36/smkmuhammadiyahbintan-20260215-0003.webp" alt="Foto 3"></div>
+      <div class="dok-item"><img src="https://i.ibb.co.com/7J3qk0SG/smkmuhammadiyahbintan-20260215-0004.webp" alt="Foto 4"></div>
+      <div class="dok-item"><img src="https://i.ibb.co.com/Qz0SgK5/smkmuhammadiyahbintan-20260215-0005.webp" alt="Foto 5"></div>
+      <div class="dok-item"><img src="https://i.ibb.co.com/bjNTkJSb/smkmuhammadiyahbintan-20260215-0006.webp" alt="Foto 6"></div>
     </div>
   </div>
-</section>
+</div>
+
+<!-- LAYANAN -->
+<div class="layanan-section">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div class="sec-hd">
+      <div class="sec-tag">🔗 Layanan</div>
+      <h2 class="sec-title">Layanan Digital Sekolah</h2>
+    </div>
+    <div class="layanan-grid">
+      <a href="profil.html" class="l-card"><div class="l-icon">🏫</div><h3>Profil Sekolah</h3><p>Info lengkap tentang sekolah kami</p></a>
+      <a href="berita.html" class="l-card"><div class="l-icon">📰</div><h3>Berita & Info</h3><p>Update kegiatan dan pengumuman</p></a>
+      <a href="spp.html" class="l-card"><div class="l-icon">💳</div><h3>Cek SPP</h3><p>Cek status pembayaran SPP siswa</p></a>
+      <a href="ppdb.html" class="l-card"><div class="l-icon">🎓</div><h3>PPDB Online</h3><p>Pendaftaran peserta didik baru</p></a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
 <footer>
-  <p>© 2026 SMK Muhammadiyah Bintan</p>
+  <div class="footer-grid">
+    <div class="f-brand">
+      <div class="f-logo"><img src="logo.png" alt="Logo"><span>SMK Muhammadiyah Bintan</span></div>
+      <p>Mewujudkan insan bertakwa, terampil, mandiri, dan berdaya saing di dunia usaha dan industri. Kepulauan Riau.</p>
+    </div>
+    <div class="f-col">
+      <h4>Menu</h4>
+      <ul>
+        <li><a href="index.html">🏠 Beranda</a></li>
+        <li><a href="profil.html">🏫 Profil</a></li>
+        <li><a href="berita.html">📰 Berita</a></li>
+        <li><a href="spp.html">💳 Cek SPP</a></li>
+        <li><a href="ppdb.html">🎓 PPDB</a></li>
+      </ul>
+    </div>
+    <div class="f-col">
+      <h4>Kontak</h4>
+      <ul>
+        <li><span>📍 Jl. Mekar Sari No.3, Tanjung Uban Timur, Bintan Utara</span></li>
+        <li><span>📞 0771-483323</span></li>
+        <li><span>✉️ esemkamu@yahoo.com</span></li>
+      </ul>
+    </div>
+  </div>
+  <div class="f-bottom">© 2026 SMK Muhammadiyah Bintan — Kepulauan Riau. All rights reserved.</div>
 </footer>
 
-</body>
 <script>
+  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyX7uwnYVEHpfSIC0qt_qZT8pzWQSpr5ZZfxz6XqME558lhw2_s8vvWK-qCmDE0gqDX/exec';
+
+  fetch(SCRIPT_URL).then(r => r.json()).then(res => {
+    const el = document.getElementById('beritaHome');
+    if (res.status === 'success' && res.data.length > 0) {
+      const list = res.data.slice(0, 3);
+      // Kalau ganjil, tambahkan class biar tengah
+      const gridClass = list.length % 2 !== 0 ? 'berita-grid ganjil' : 'berita-grid';
+      let html = `<div class="${gridClass}">`;
+      list.forEach(b => {
+        const f = b.foto ? `<div class="b-foto"><img src="${b.foto}" onerror="this.parentElement.innerHTML='📰'"></div>` : `<div class="b-foto">📰</div>`;
+        html += `<div class="b-card" onclick="location.href='berita.html'">${f}<div class="b-body"><div class="b-tag">${b.kategori}</div><h3>${b.judul}</h3><div class="b-meta"><span>📅 ${b.tanggal}</span><span>✍️ ${b.penulis || 'Admin'}</span></div></div></div>`;
+      });
+      html += '</div>';
+      el.innerHTML = html;
+    } else {
+      el.innerHTML = '<div class="berita-loading">📭 Belum ada berita.</div>';
+    }
+  }).catch(() => {
+    document.getElementById('beritaHome').innerHTML = '<div class="berita-loading">📭 Belum ada berita.</div>';
+  });
+
   function toggleNav() {
     document.getElementById('mainNav').classList.toggle('active');
     document.getElementById('overlay').classList.toggle('active');
   }
 </script>
+</body>
 </html>
