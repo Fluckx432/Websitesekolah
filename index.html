@@ -39,17 +39,19 @@
     .logo-text span { display: block; font-size: 0.68rem; font-weight: 400; opacity: 0.75; }
     .menu-toggle { display: none; background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; }
     nav ul { list-style: none; display: flex; align-items: center; gap: 2px; }
-    nav a { color: rgba(255,255,255,0.88); font-weight: 500; text-decoration: none; font-size: 0.875rem; padding: 7px 14px; border-radius: 8px; transition: all 0.2s; }
+    nav a { color: rgba(255,255,255,0.88); font-weight: 500; text-decoration: none; font-size: 0.875rem; padding: 7px 14px; border-radius: 8px; transition: all 0.2s; white-space: nowrap; }
     nav a:hover, nav a.active-page { background: rgba(255,255,255,0.14); color: white; }
     nav a.ppdb-link { background: var(--hijau-cerah); color: white; border-radius: 50px; padding: 7px 20px; font-weight: 700; margin-left: 6px; }
     nav a.ppdb-link:hover { background: #388E3C; }
+    .nav-footer { display: none !important; }
+    .nav-footer { display: none !important; }
 
     /* ─── HERO ─── */
     .hero {
       position: relative;
       min-height: 88vh;
       display: flex; align-items: center; justify-content: center;
-      background: linear-gradient(160deg, var(--hijau-tua) 0%, #2E7D32 45%, #388E3C 100%);
+      background: linear-gradient(160deg, #2E7D32 0%, #388E3C 45%, #4CAF50 100%);
       overflow: hidden;
       padding: 80px 32px 100px;
       text-align: center;
@@ -163,16 +165,14 @@
     /* ─── KEUNGGULAN ─── */
     .keunggulan-bg { background: white; padding: 80px 32px; }
     .unggulan-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+      display: flex; flex-wrap: wrap; gap: 24px;
       max-width: 1100px; margin: 0 auto;
+      justify-content: center;
     }
-    /* jika ganjil, rata tengah */
-    .unggulan-grid.ganjil { justify-items: center; }
-    .unggulan-grid.ganjil .u-card:last-child:nth-child(odd) { grid-column: 2; }
     .u-card {
       background: var(--bg); border-radius: 20px; padding: 32px 28px;
       text-align: center; transition: all 0.3s; border: 1.5px solid transparent;
-      width: 100%;
+      flex: 0 0 calc(33.333% - 16px); min-width: 240px; max-width: 340px;
     }
     .u-card:hover { background: white; border-color: var(--hijau-muda); transform: translateY(-5px); box-shadow: 0 12px 36px rgba(46,125,50,0.1); }
     .u-icon { width: 68px; height: 68px; border-radius: 18px; background: var(--hijau-pale); display: flex; align-items: center; justify-content: center; margin: 0 auto 18px; }
