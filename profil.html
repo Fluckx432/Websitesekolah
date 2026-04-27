@@ -2,208 +2,123 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Profil - SMK Muhammadiyah Bintan</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --hijau-tua: #2E7D32;
-      --hijau: #4CAF50;
-      --hijau-muda: #A5D6A7;
-      --hijau-pale: #E8F5E9;
-      --emas: #F9A825;
-      --abu-gelap: #263238;
-      --abu: #546E7A;
-      --putih: #ffffff;
-    }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Plus Jakarta Sans', Arial, sans-serif; background: #f5f5f5; color: var(--abu-gelap); overflow-x: hidden; }
+    :root { --g1:#071a08;--g2:#0d2e10;--g3:#1B5E20;--g4:#2E7D32;--g5:#388E3C;--g6:#4CAF50;--g7:#81C784;--g8:#A5D6A7;--g9:#C8E6C9;--g10:#E8F5E9;--gold:#F9A825;--white:#fff;--ink:#071a08;--muted:#4a6741;--light:#7a9b72;--bg:#f4f8f4; }
+    *{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+    body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--ink);overflow-x:hidden;}
+    header{background:var(--g1);position:sticky;top:0;z-index:1000;}
+    .header-inner{display:flex;justify-content:space-between;align-items:center;height:64px;padding:0 40px;max-width:1240px;margin:0 auto;}
+    .logo{display:flex;align-items:center;gap:11px;text-decoration:none;}
+    .logo img{height:42px;width:42px;border-radius:50%;background:white;padding:2px;object-fit:contain;}
+    .logo-text{color:white;font-weight:800;font-size:0.85rem;line-height:1.3;}
+    .logo-text span{display:block;font-size:0.65rem;font-weight:400;opacity:0.6;}
+    .menu-toggle{display:none;background:none;border:none;color:white;font-size:1.4rem;cursor:pointer;}
+    nav ul{list-style:none;display:flex;align-items:center;gap:1px;}
+    nav a{color:rgba(255,255,255,0.7);font-weight:500;text-decoration:none;font-size:0.84rem;padding:7px 13px;border-radius:8px;transition:all 0.2s;white-space:nowrap;}
+    nav a:hover,nav a.active-page{background:rgba(255,255,255,0.1);color:white;}
+    nav a.ppdb-link{background:var(--g6);color:white;border-radius:50px;padding:7px 20px;font-weight:700;margin-left:8px;}
 
-    /* HEADER */
-    header { background: var(--hijau-tua); position: sticky; top: 0; z-index: 1000; width: 100%; }
-    .header-inner {
-      display: flex; justify-content: space-between; align-items: center;
-      height: 68px; padding: 0 20px; max-width: 1200px; margin: 0 auto;
-    }
-    .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
-    .logo img { height: 48px; width: 48px; object-fit: contain; border-radius: 50%; background: white; padding: 2px; }
-    .logo-text { color: white; font-weight: 700; font-size: 1rem; line-height: 1.3; }
-    .logo-text span { display: block; font-size: 0.75rem; font-weight: 400; opacity: 0.85; }
-    .menu-toggle { display: none; background: none; border: none; color: white; font-size: 1.6rem; cursor: pointer; }
-    nav ul { list-style: none; display: flex; align-items: center; gap: 6px; }
-    nav a { color: white; font-weight: 500; text-decoration: none; font-size: 0.9rem; padding: 6px 12px; border-radius: 6px; transition: background 0.2s; }
-    nav a:hover { background: rgba(255,255,255,0.15); }
-    nav a.active { background: rgba(255,255,255,0.2); }
-    nav a.ppdb-link { background: var(--hijau); border-radius: 20px; padding: 6px 16px; font-weight: 600; }
-    .nav-footer { display: none !important; }
+    /* PAGE HERO */
+    .page-hero{background:var(--g1);padding:72px 40px 80px;position:relative;overflow:hidden;}
+    .page-hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 70% 80% at 80% 50%,rgba(46,125,50,0.25) 0%,transparent 60%);}
+    .page-hero-lines{position:absolute;inset:0;opacity:0.03;background-image:repeating-linear-gradient(0deg,transparent,transparent 39px,rgba(255,255,255,1) 40px),repeating-linear-gradient(90deg,transparent,transparent 39px,rgba(255,255,255,1) 40px);background-size:40px 40px;}
+    .page-hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:60px;background:var(--bg);clip-path:ellipse(60% 100% at 50% 100%);}
+    .page-hero-inner{position:relative;z-index:2;max-width:1100px;margin:0 auto;}
+    .page-tag{display:inline-flex;align-items:center;gap:8px;font-size:10px;font-weight:700;letter-spacing:2px;color:var(--g8);text-transform:uppercase;margin-bottom:16px;}
+    .page-tag::before{content:'';display:block;width:16px;height:2px;background:var(--g7);}
+    .page-hero h1{font-family:'DM Serif Display',serif;font-size:clamp(2rem,4vw,3.2rem);color:white;line-height:1.15;}
+    .page-hero h1 em{color:var(--g7);font-style:italic;}
+    .page-hero p{color:rgba(255,255,255,0.55);font-size:14px;margin-top:10px;}
 
-    /* HERO */
-    .page-hero {
-      background: linear-gradient(135deg, var(--hijau-tua), var(--hijau));
-      padding: 50px 20px 60px; text-align: center; position: relative;
-    }
-    .page-hero::after {
-      content: ''; position: absolute; bottom: 0; left: 0; right: 0;
-      height: 40px; background: #f5f5f5;
-      clip-path: ellipse(55% 100% at 50% 100%);
-    }
-    .page-hero h1 { color: white; font-size: 26px; margin-bottom: 8px; }
-    .page-hero p { color: rgba(255,255,255,0.8); font-size: 14px; }
+    /* CONTENT */
+    .content-wrap{max-width:1000px;margin:0 auto;padding:64px 40px;}
+    .sec-tag{display:inline-flex;align-items:center;gap:8px;font-size:9px;font-weight:800;letter-spacing:2.5px;color:var(--g5);text-transform:uppercase;margin-bottom:10px;}
+    .sec-tag::before{content:'';display:block;width:16px;height:2px;background:var(--g6);}
+    .sec-title{font-family:'DM Serif Display',serif;font-size:1.8rem;color:var(--ink);margin-bottom:28px;}
+    .sec-title em{color:var(--g4);font-style:italic;}
 
-    /* SECTION */
-    .sec { padding: 40px 20px; max-width: 900px; margin: 0 auto; }
-    .sec-title { text-align: center; margin-bottom: 28px; }
-    .sec-title .tag {
-      display: inline-block; background: var(--hijau-pale); color: var(--hijau-tua);
-      font-size: 11px; font-weight: 700; letter-spacing: 2px;
-      padding: 5px 14px; border-radius: 50px; margin-bottom: 10px;
-    }
-    .sec-title h2 { font-size: 22px; color: var(--hijau-tua); }
+    /* INFO GRID */
+    .info-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:56px;}
+    .info-card{background:white;border-radius:18px;padding:22px 24px;display:flex;align-items:flex-start;gap:16px;border:1px solid #eaf2ea;transition:all 0.25s;}
+    .info-card:hover{box-shadow:0 8px 24px rgba(27,94,32,0.07);transform:translateY(-2px);}
+    .info-ic{width:44px;height:44px;background:var(--g10);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}
+    .info-card label{font-size:9px;font-weight:800;color:var(--light);letter-spacing:1.5px;text-transform:uppercase;display:block;margin-bottom:4px;}
+    .info-card p{font-size:14px;font-weight:700;color:var(--ink);}
 
-    /* INFO SEKOLAH */
-    .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-    .info-card {
-      background: white; border-radius: 14px; padding: 20px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.06);
-      display: flex; align-items: flex-start; gap: 14px;
-    }
-    .info-card .ic {
-      width: 42px; height: 42px; background: var(--hijau-pale);
-      border-radius: 10px; display: flex; align-items: center;
-      justify-content: center; font-size: 20px; flex-shrink: 0;
-    }
-    .info-card .info-text label { font-size: 11px; color: var(--abu); font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
-    .info-card .info-text p { font-size: 14px; color: var(--abu-gelap); font-weight: 600; margin-top: 3px; }
+    /* DIVIDER */
+    .divider{height:1px;background:linear-gradient(to right,transparent,var(--g9),transparent);margin:56px 0;}
 
-    /* KEPALA SEKOLAH */
-    .kepsek-box {
-      background: white; border-radius: 16px; padding: 30px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.06);
-      display: flex; align-items: center; gap: 24px;
-    }
-    .kepsek-avatar {
-      width: 90px; height: 90px; border-radius: 50%;
-      background: linear-gradient(135deg, var(--hijau-tua), var(--hijau));
-      display: flex; align-items: center; justify-content: center;
-      font-size: 36px; flex-shrink: 0;
-    }
-    .kepsek-info h3 { font-size: 20px; color: var(--hijau-tua); margin-bottom: 6px; }
-    .kepsek-info .jabatan {
-      display: inline-block; background: var(--hijau-pale); color: var(--hijau-tua);
-      font-size: 12px; font-weight: 700; padding: 4px 14px; border-radius: 50px;
-      margin-bottom: 10px;
-    }
-    .kepsek-info p { font-size: 14px; color: var(--abu); line-height: 1.6; }
+    /* KEPSEK */
+    .kepsek-wrap{background:white;border-radius:24px;overflow:hidden;display:grid;grid-template-columns:auto 1fr;border:1px solid #eaf2ea;margin-bottom:56px;box-shadow:0 4px 24px rgba(7,26,8,0.05);}
+    .kepsek-left{background:linear-gradient(180deg,var(--g3),var(--g4));padding:40px 32px;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:200px;}
+    .kepsek-ava{width:80px;height:80px;border-radius:50%;background:rgba(255,255,255,0.15);border:3px solid rgba(255,255,255,0.3);display:flex;align-items:center;justify-content:center;font-size:36px;margin:0 auto 16px;}
+    .kepsek-nm{font-weight:800;color:white;font-size:14px;}
+    .kepsek-jb{font-size:11px;color:rgba(255,255,255,0.65);background:rgba(255,255,255,0.12);padding:3px 12px;border-radius:50px;margin-top:6px;display:inline-block;}
+    .kepsek-right{padding:40px;}
+    .kepsek-right p{font-size:15px;color:#374151;line-height:1.85;}
 
     /* VISI MISI */
-    .visi-box {
-      background: linear-gradient(135deg, var(--hijau-tua), var(--hijau));
-      border-radius: 16px; padding: 30px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-      margin-bottom: 20px;
-      text-align: center;
-    }
-    .visi-box .label { 
-      display: inline-block; background: var(--emas); color: var(--abu-gelap);
-      font-size: 12px; font-weight: 800; letter-spacing: 3px;
-      padding: 5px 20px; border-radius: 50px; margin-bottom: 16px;
-    }
-    .visi-box p { color: white; font-size: 18px; font-weight: 700; font-style: italic; line-height: 1.5; }
-
-    .misi-box {
-      background: white; border-radius: 16px; padding: 30px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.06);
-    }
-    .misi-box .label {
-      display: inline-block; background: var(--hijau-pale); color: var(--hijau-tua);
-      font-size: 12px; font-weight: 800; letter-spacing: 3px;
-      padding: 5px 20px; border-radius: 50px; margin-bottom: 20px;
-    }
-    .misi-list { list-style: none; }
-    .misi-list li {
-      display: flex; align-items: flex-start; gap: 12px;
-      padding: 12px 0; border-bottom: 1px solid var(--hijau-pale);
-      font-size: 14px; color: var(--abu-gelap); line-height: 1.6;
-    }
-    .misi-list li:last-child { border-bottom: none; }
-    .misi-list li .arrow {
-      width: 24px; height: 24px; background: var(--emas);
-      border-radius: 50%; display: flex; align-items: center;
-      justify-content: center; font-size: 12px; flex-shrink: 0; margin-top: 1px;
-    }
+    .visi-box{background:linear-gradient(135deg,var(--g3),var(--g5));border-radius:24px;padding:40px;margin-bottom:20px;position:relative;overflow:hidden;}
+    .visi-box::before{content:'VISI';position:absolute;right:24px;top:50%;transform:translateY(-50%);font-family:'DM Serif Display',serif;font-size:6rem;color:rgba(255,255,255,0.05);font-weight:700;line-height:1;}
+    .visi-label{display:inline-block;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.25);color:rgba(255,255,255,0.9);font-size:9px;font-weight:800;letter-spacing:2px;padding:4px 14px;border-radius:50px;margin-bottom:16px;}
+    .visi-box p{font-family:'DM Serif Display',serif;font-size:1.25rem;color:white;font-style:italic;line-height:1.5;position:relative;z-index:1;}
+    .misi-box{background:white;border-radius:24px;padding:36px;border:1px solid #eaf2ea;}
+    .misi-label{display:inline-block;background:var(--g10);color:var(--g4);font-size:9px;font-weight:800;letter-spacing:2px;padding:4px 14px;border-radius:50px;margin-bottom:20px;}
+    .misi-list{list-style:none;}
+    .misi-list li{display:flex;align-items:flex-start;gap:14px;padding:14px 0;border-bottom:1px solid var(--g10);font-size:14px;color:#374151;line-height:1.7;}
+    .misi-list li:last-child{border-bottom:none;}
+    .misi-dot{width:24px;height:24px;background:var(--g10);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;}
+    .misi-dot::after{content:'';width:8px;height:8px;background:var(--g5);border-radius:50%;display:block;}
 
     /* KONTAK */
-    .kontak-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-    .kontak-card {
-      background: white; border-radius: 14px; padding: 20px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.06);
-      text-align: center;
-    }
-    .kontak-card .ic { font-size: 28px; margin-bottom: 10px; }
-    .kontak-card label { font-size: 11px; color: var(--abu); font-weight: 700; letter-spacing: 1px; text-transform: uppercase; display: block; margin-bottom: 6px; }
-    .kontak-card p { font-size: 14px; color: var(--hijau-tua); font-weight: 600; }
+    .kontak-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:28px;}
+    .kontak-card{background:white;border-radius:18px;padding:24px;text-align:center;border:1px solid #eaf2ea;transition:all 0.25s;}
+    .kontak-card:hover{box-shadow:0 8px 24px rgba(27,94,32,0.07);transform:translateY(-2px);}
+    .kontak-ic{font-size:28px;margin-bottom:10px;}
+    .kontak-card label{font-size:9px;font-weight:800;color:var(--light);letter-spacing:1.5px;text-transform:uppercase;display:block;margin-bottom:6px;}
+    .kontak-card p,.kontak-card a{font-size:14px;font-weight:700;color:var(--g4);text-decoration:none;}
+    .maps-box{border-radius:20px;overflow:hidden;box-shadow:0 4px 24px rgba(7,26,8,0.08);}
+    .maps-box iframe{width:100%;height:280px;border:none;display:block;}
 
-    /* MAPS */
-    .maps-box {
-      background: white; border-radius: 16px; overflow: hidden;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.06);
-    }
-    .maps-box iframe { width: 100%; height: 280px; border: none; display: block; }
+    footer{background:var(--g1);padding:40px;text-align:center;}
+    footer p{font-size:13px;color:rgba(255,255,255,0.3);}
 
-    .divider { height: 2px; background: linear-gradient(to right, transparent, var(--hijau-muda), transparent); margin: 0 30px; }
+    .overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:998;}
+    .overlay.active{display:block;}
+    .nav-header{display:none;}
 
-    /* FOOTER */
-    footer { background: #0a3d0a; color: white; text-align: center; padding: 30px 20px; font-size: 14px; }
-
-    .overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 998; }
-    .overlay.active { display: block; }
-    .nav-header { display: none; }
-
-    @media (max-width: 768px) {
-      .menu-toggle { display: block; }
-      nav {
-        position: fixed; top: 0; right: 0; bottom: 0;
-        width: 75%; max-width: 280px;
-        background: #1B5E20; z-index: 999;
-        transform: translateX(100%); transition: transform 0.3s ease;
-        box-shadow: -6px 0 20px rgba(0,0,0,0.3);
-        display: flex; flex-direction: column; overflow: hidden;
-      }
-      nav.active { transform: translateX(0); }
-      .nav-header { display: flex; align-items: center; gap: 12px; padding: 24px 20px 20px; border-bottom: 1px solid rgba(255,255,255,0.15); background: rgba(0,0,0,0.15); }
-      .nav-header img { width: 42px; height: 42px; border-radius: 50%; background: white; padding: 2px; object-fit: contain; }
-      .nav-header-text { color: white; font-size: 0.82rem; font-weight: 700; line-height: 1.3; }
-      .nav-header-text span { display: block; font-size: 0.7rem; font-weight: 400; opacity: 0.75; }
-      nav ul { flex-direction: column; align-items: flex-start; padding: 16px 14px; gap: 4px; flex: 1; }
-      nav ul li { width: 100%; }
-      nav ul li.divider { height: 1px; background: rgba(255,255,255,0.12); margin: 8px 6px; width: calc(100% - 12px); }
-      nav a { width: 100%; text-align: left; padding: 13px 16px; border-radius: 10px; font-size: 0.95rem; display: flex; align-items: center; gap: 12px; }
-      nav a:hover { background: rgba(255,255,255,0.12); }
-      nav a .nav-icon { font-size: 1.1rem; width: 24px; text-align: center; }
-      nav a.active-page { background: rgba(255,255,255,0.18); font-weight: 700; }
-      nav a.ppdb-link { background: rgba(76,175,80,0.3); font-weight: 600; border: 1px solid rgba(76,175,80,0.5); }
-      nav a.ppdb-link:hover { background: rgba(76,175,80,0.5); }
-    .nav-footer { display: none !important; }
-      .nav-footer { padding: 16px 20px; border-top: 1px solid rgba(255,255,255,0.12); color: rgba(255,255,255,0.5); font-size: 11px; text-align: center; }
-      .info-grid, .kontak-grid { grid-template-columns: 1fr; }
-      .kepsek-box { flex-direction: column; text-align: center; }
+    @media(max-width:768px){
+      .menu-toggle{display:block;}
+      nav{position:fixed;top:0;right:0;bottom:0;width:78%;max-width:290px;background:var(--g3);z-index:999;transform:translateX(100%);transition:transform 0.3s ease;display:flex;flex-direction:column;overflow:hidden;}
+      nav.active{transform:translateX(0);}
+      .nav-header{display:flex;align-items:center;gap:12px;padding:24px 20px 20px;border-bottom:1px solid rgba(255,255,255,0.1);}
+      .nav-header img{width:38px;height:38px;border-radius:50%;background:white;padding:2px;object-fit:contain;}
+      .nav-header-text{color:white;font-size:0.8rem;font-weight:800;line-height:1.3;}
+      .nav-header-text span{display:block;font-size:0.65rem;opacity:0.65;}
+      nav ul{flex-direction:column;align-items:flex-start;padding:16px 14px;gap:2px;flex:1;}
+      nav ul li{width:100%;}
+      nav ul li.divider{height:1px;background:rgba(255,255,255,0.1);margin:6px 0;}
+      nav a{width:100%;padding:12px 16px;border-radius:10px;font-size:0.9rem;display:flex;align-items:center;gap:12px;color:rgba(255,255,255,0.8);}
+      nav a .nav-icon{width:22px;text-align:center;}
+      nav a.active-page{background:rgba(255,255,255,0.15);color:white;font-weight:700;}
+      nav a.ppdb-link{background:rgba(76,175,80,0.25);border:1px solid rgba(76,175,80,0.35);margin-left:0;border-radius:10px;}
+      .header-inner,.content-wrap,.page-hero{padding-left:20px;padding-right:20px;}
+      .info-grid,.kontak-grid{grid-template-columns:1fr;}
+      .kepsek-wrap{grid-template-columns:1fr;}
+      .kepsek-left{flex-direction:row;gap:16px;padding:24px;}
     }
   </style>
 </head>
 <body>
-
 <header>
   <div class="header-inner">
-    <a href="index.html" class="logo">
-      <img src="logo.png" alt="Logo">
-      <div class="logo-text">SMK Muhammadiyah Bintan<span>Kepulauan Riau</span></div>
-    </a>
+    <a href="index.html" class="logo"><img src="logo.png" alt="Logo"><div class="logo-text">SMK Muhammadiyah Bintan<span>Kepulauan Riau</span></div></a>
     <button class="menu-toggle" onclick="toggleNav()">☰</button>
     <nav id="mainNav">
-      <div class="nav-header">
-        <img src="logo.png" alt="Logo">
-        <div class="nav-header-text">SMK Muhammadiyah Bintan<span>Kepulauan Riau</span></div>
-      </div>
+      <div class="nav-header"><img src="logo.png" alt="Logo"><div class="nav-header-text">SMK Muhammadiyah Bintan<span>Kepulauan Riau</span></div></div>
       <ul>
         <li><a href="index.html"><span class="nav-icon">🏠</span> Beranda</a></li>
         <li><a href="profil.html" class="active-page"><span class="nav-icon">🏫</span> Profil</a></li>
@@ -212,181 +127,90 @@
         <li class="divider"></li>
         <li><a href="ppdb.html" class="ppdb-link"><span class="nav-icon">🎓</span> PPDB</a></li>
       </ul>
-      <div class="nav-footer">© 2026 SMK Muhammadiyah Bintan</div>
     </nav>
   </div>
 </header>
 <div class="overlay" id="overlay" onclick="toggleNav()"></div>
 
 <div class="page-hero">
-  <h1>🏫 Profil Sekolah</h1>
-  <p>Mengenal lebih dekat SMK Muhammadiyah Bintan</p>
+  <div class="page-hero-bg"></div>
+  <div class="page-hero-lines"></div>
+  <div class="page-hero-inner">
+    <div class="page-tag">Tentang Kami</div>
+    <h1>Profil <em>Sekolah</em></h1>
+    <p>Mengenal lebih dekat SMK Muhammadiyah Bintan, Kepulauan Riau</p>
+  </div>
 </div>
 
-<!-- INFO SEKOLAH -->
-<div class="sec">
-  <div class="sec-title">
-    <div class="tag">📋 IDENTITAS</div>
-    <h2>Informasi Sekolah</h2>
-  </div>
+<div class="content-wrap">
+  <!-- INFO -->
+  <div class="sec-tag">Identitas</div>
+  <div class="sec-title">Informasi <em>Sekolah</em></div>
   <div class="info-grid">
-    <div class="info-card">
-      <div class="ic">🏫</div>
-      <div class="info-text">
-        <label>Nama Sekolah</label>
-        <p>SMKS Muhammadiyah Bintan</p>
-      </div>
-    </div>
-    <div class="info-card">
-      <div class="ic">🔢</div>
-      <div class="info-text">
-        <label>NPSN</label>
-        <p>11002262</p>
-      </div>
-    </div>
-    <div class="info-card">
-      <div class="ic">📍</div>
-      <div class="info-text">
-        <label>Alamat</label>
-        <p>Jl. Mekar Sari No.3, Tanjung Uban Timur, Bintan Utara</p>
-      </div>
-    </div>
-    <div class="info-card">
-      <div class="ic">🗺️</div>
-      <div class="info-text">
-        <label>Kabupaten/Provinsi</label>
-        <p>Kab. Bintan, Kepulauan Riau</p>
-      </div>
-    </div>
-    <div class="info-card">
-      <div class="ic">📞</div>
-      <div class="info-text">
-        <label>Telepon</label>
-        <p>0771-483323</p>
-      </div>
-    </div>
-    <div class="info-card">
-      <div class="ic">✉️</div>
-      <div class="info-text">
-        <label>Email</label>
-        <p>esemkamu&#64;yahoo.com</p>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="divider"></div>
-
-<!-- KEPALA SEKOLAH -->
-<div class="sec">
-  <div class="sec-title">
-    <div class="tag">👤 PIMPINAN</div>
-    <h2>Kepala Sekolah</h2>
-  </div>
-  <div class="kepsek-box">
-    <div class="kepsek-avatar">👩‍💼</div>
-    <div class="kepsek-info">
-      <h3>Elvirahmi, S.E</h3>
-      <div class="jabatan">Kepala Sekolah</div>
-      <p>Memimpin SMKS Muhammadiyah Bintan dengan dedikasi tinggi dalam mewujudkan insan bertakwa, terampil, mandiri, dan berdaya saing di dunia usaha dan industri.</p>
-    </div>
-  </div>
-</div>
-
-<div class="divider"></div>
-
-<!-- VISI MISI -->
-<div class="sec">
-  <div class="sec-title">
-    <div class="tag">🎯 VISI & MISI</div>
-    <h2>Visi dan Misi Sekolah</h2>
+    <div class="info-card"><div class="info-ic">🏫</div><div><label>Nama Sekolah</label><p>SMKS Muhammadiyah Bintan</p></div></div>
+    <div class="info-card"><div class="info-ic">🔢</div><div><label>NPSN</label><p>11002262</p></div></div>
+    <div class="info-card"><div class="info-ic">📍</div><div><label>Alamat</label><p>Jl. Mekar Sari No.3, Tanjung Uban Timur, Bintan Utara</p></div></div>
+    <div class="info-card"><div class="info-ic">🗺️</div><div><label>Kabupaten / Provinsi</label><p>Kab. Bintan, Kepulauan Riau</p></div></div>
+    <div class="info-card"><div class="info-ic">📞</div><div><label>Telepon</label><p>0771-483323</p></div></div>
+    <div class="info-card"><div class="info-ic">✉️</div><div><label>Email</label><p>esemkamu@yahoo.com</p></div></div>
   </div>
 
+  <div class="divider"></div>
+
+  <!-- KEPSEK -->
+  <div class="sec-tag">Pimpinan</div>
+  <div class="sec-title">Kepala <em>Sekolah</em></div>
+  <div class="kepsek-wrap">
+    <div class="kepsek-left">
+      <div class="kepsek-ava">👩‍💼</div>
+      <div class="kepsek-nm">Elvirahmi, S.E</div>
+      <div class="kepsek-jb">Kepala Sekolah</div>
+    </div>
+    <div class="kepsek-right">
+      <p>Memimpin SMKS Muhammadiyah Bintan dengan dedikasi tinggi dalam mewujudkan insan bertakwa, terampil, mandiri, dan berdaya saing di dunia usaha dan industri. Berkomitmen menciptakan lingkungan belajar yang kondusif, islami, dan produktif bagi seluruh peserta didik.</p>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- VISI MISI -->
+  <div class="sec-tag">Visi & Misi</div>
+  <div class="sec-title">Visi dan <em>Misi</em> Sekolah</div>
   <div class="visi-box">
-    <div class="label">VISI</div>
+    <div class="visi-label">VISI</div>
     <p>"Mewujudkan insan bertakwa, terampil, mandiri, berdaya saing di dunia usaha/industri"</p>
   </div>
-
   <div class="misi-box">
-    <div class="label">MISI</div>
+    <div class="misi-label">MISI</div>
     <ul class="misi-list">
-      <li>
-        <div class="arrow">▶</div>
-        Mendidik siswa dengan keyakinan tauhid yang murni berdasarkan Al-Qur'an dan As-Sunnah sehingga terwujud masyarakat Islam yang sebenar-benarnya
-      </li>
-      <li>
-        <div class="arrow">▶</div>
-        Menjadikan siswa yang terampil dalam mengasah keahlian sesuai dengan kompetensinya
-      </li>
-      <li>
-        <div class="arrow">▶</div>
-        Menanamkan budaya disiplin dan bekermajuan sebagai falsafah hidup bagi seluruh elemen sekolah
-      </li>
-      <li>
-        <div class="arrow">▶</div>
-        Menerapkan sistem manajemen sekolah berlandaskan kekeluargaan yang islami
-      </li>
-      <li>
-        <div class="arrow">▶</div>
-        Menciptakan lingkungan belajar yang kondusif, dinamis, dan produktif
-      </li>
-      <li>
-        <div class="arrow">▶</div>
-        Menerapkan standar pelayanan prima sesuai dengan perkembangan dunia usaha dan industri
-      </li>
+      <li><div class="misi-dot"></div>Mendidik siswa dengan keyakinan tauhid yang murni berdasarkan Al-Qur'an dan As-Sunnah sehingga terwujud masyarakat Islam yang sebenar-benarnya</li>
+      <li><div class="misi-dot"></div>Menjadikan siswa yang terampil dalam mengasah keahlian sesuai dengan kompetensinya</li>
+      <li><div class="misi-dot"></div>Menanamkan budaya disiplin dan kemajuan sebagai falsafah hidup bagi seluruh elemen sekolah</li>
+      <li><div class="misi-dot"></div>Menerapkan sistem manajemen sekolah berlandaskan kekeluargaan yang islami</li>
+      <li><div class="misi-dot"></div>Menciptakan lingkungan belajar yang kondusif, dinamis, dan produktif</li>
+      <li><div class="misi-dot"></div>Menerapkan standar pelayanan prima sesuai dengan perkembangan dunia usaha dan industri</li>
     </ul>
   </div>
-</div>
 
-<div class="divider"></div>
+  <div class="divider"></div>
 
-<!-- KONTAK -->
-<div class="sec">
-  <div class="sec-title">
-    <div class="tag">📞 KONTAK</div>
-    <h2>Hubungi Kami</h2>
+  <!-- KONTAK -->
+  <div class="sec-tag">Kontak</div>
+  <div class="sec-title">Hubungi <em>Kami</em></div>
+  <div class="kontak-grid">
+    <div class="kontak-card"><div class="kontak-ic">📞</div><label>Telepon</label><p>0771-483323</p></div>
+    <div class="kontak-card"><div class="kontak-ic">✉️</div><label>Email</label><p>esemkamu@yahoo.com</p></div>
+    <div class="kontak-card"><div class="kontak-ic">💬</div><label>WhatsApp (Amar)</label><p><a href="https://wa.me/6285173334099">0851-7333-4099</a></p></div>
+    <div class="kontak-card"><div class="kontak-ic">💬</div><label>WhatsApp (Andres)</label><p><a href="https://wa.me/6283188851492">0831-8885-1492</a></p></div>
   </div>
-  <div class="kontak-grid" style="margin-bottom:20px;">
-    <div class="kontak-card">
-      <div class="ic">📞</div>
-      <label>Telepon</label>
-      <p>0771-483323</p>
-    </div>
-    <div class="kontak-card">
-      <div class="ic">✉️</div>
-      <label>Email</label>
-      <p>esemkamu&#64;yahoo.com</p>
-    </div>
-    <div class="kontak-card">
-      <div class="ic">💬</div>
-      <label>WhatsApp (Amar)</label>
-      <p><a href="https://wa.me/6285173334099" style="color:var(--hijau-tua);text-decoration:none;">0851-7333-4099</a></p>
-    </div>
-    <div class="kontak-card">
-      <div class="ic">💬</div>
-      <label>WhatsApp (Andres)</label>
-      <p><a href="https://wa.me/6283188851492" style="color:var(--hijau-tua);text-decoration:none;">0831-8885-1492</a></p>
-    </div>
-  </div>
-
-  <!-- MAPS -->
   <div class="maps-box">
-    <iframe
-      src="https://maps.google.com/maps?q=SMK+Muhammadiyah+Bintan+Tanjung+Uban+Bintan&output=embed"
-      allowfullscreen="" loading="lazy">
-    </iframe>
+    <iframe src="https://maps.google.com/maps?q=SMK+Muhammadiyah+Bintan+Tanjung+Uban+Bintan&output=embed" allowfullscreen loading="lazy"></iframe>
   </div>
 </div>
 
-<footer>
-  <p>© 2026 SMK Muhammadiyah Bintan</p>
-</footer>
-
+<footer><p>© 2026 SMK Muhammadiyah Bintan — Kepulauan Riau</p></footer>
 <script>
-  function toggleNav() {
-    document.getElementById('mainNav').classList.toggle('active');
-    document.getElementById('overlay').classList.toggle('active');
-  }
+function toggleNav(){document.getElementById('mainNav').classList.toggle('active');document.getElementById('overlay').classList.toggle('active');}
 </script>
 </body>
 </html>
